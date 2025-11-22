@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* stylelint-disable-next-line at-rule-no-unknown */
 @theme {
 	/* Custom font families */
 	--font-family-agdasima: Agdasima, sans-serif;

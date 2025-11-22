@@ -10,3 +10,4 @@ export function getAssetPath(path) {
 	return cleanBase + cleanPath
 }
 
+
