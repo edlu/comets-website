@@ -3,7 +3,7 @@
 		<div class="header-content">
 			<!-- Logo -->
 			<div class="logo">
-				<img src="/assets/comets-logo-mark.svg" alt="Comets Logo" class="logo-img" />
+				<img :src="getAssetPath('assets/comets-logo-mark.svg')" alt="Comets Logo" class="logo-img" />
 			</div>
 
 			<!-- Navigation Links -->
@@ -49,6 +49,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { IconMenu2 } from '@tabler/icons-vue'
 import Button from './Button.vue'
 import NavigationButton from './NavigationButton.vue'
+import { getAssetPath } from '@/utils/assets'
 
 const activeSection = ref('home')
 const menuOpen = ref(false)

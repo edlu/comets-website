@@ -6,7 +6,7 @@
 		<!-- Hero Video Section - Full Width -->
 		<section id="home" class="h-[30rem] md:h-[41.625rem] relative w-screen overflow-hidden -ml-[calc((100vw-100%)/2)] z-10">
 			<video autoPlay class="absolute inset-0 w-full h-full object-cover" controlsList="nodownload" loop playsInline muted>
-				<source src="/assets/hero-video.mp4" type="video/mp4" />
+				<source :src="getAssetPath('assets/hero-video.mp4')" type="video/mp4" />
 			</video>
 			<div class="absolute inset-0 bg-teal-9/20"></div>
 		</section>
@@ -19,7 +19,7 @@
 				<div class="max-w-[90rem] mx-auto w-full h-full grid grid-cols-12 gap-[1rem] md:gap-[2rem] px-[1rem] md:px-[2rem] relative">
 					<!-- Logo Overlay - Positioned absolutely within grid -->
 					<div class="absolute left-[1rem] md:left-[4.375rem] top-[-8.3125rem] w-[16rem] md:w-[24.5rem] h-[16rem] md:h-[24.5rem] z-20">
-						<img src="/assets/comets-logo.png" alt="Culver City Comets Logo" class="w-full h-full object-cover" />
+						<img :src="getAssetPath('assets/comets-logo.png')" alt="Culver City Comets Logo" class="w-full h-full object-cover" />
 					</div>
 					
 					<!-- Title Content - Starts at column 5 (span 8 columns) -->
@@ -36,7 +36,7 @@
 			
 			<!-- Decorative Background 2 (bottom) -->
 			<div class="absolute left-[5rem] md:left-[24rem] top-[60rem] md:top-[126.8125rem] rotate-[135deg] pointer-events-none z-0 opacity-100 max-w-[90rem] mx-auto">
-				<img src="/assets/background-2.svg" alt="" class="w-[80rem] md:w-[137.75rem] h-[25rem] md:h-[43.3125rem]" />
+				<img :src="getAssetPath('assets/background-2.svg')" alt="" class="w-[80rem] md:w-[137.75rem] h-[25rem] md:h-[43.3125rem]" />
 			</div>
 			
 			<!-- Main Content Grid Container -->
@@ -321,7 +321,7 @@
 		
 		<!-- Decorative Background Elements -->
 		<div class="absolute left-[5rem] md:-left-[5rem] top-[140rem] md:top-[30rem] rotate-[135deg] z-0 max-w-[90rem] mx-auto w-full opacity-100">
-			<img src="/assets/background-2.svg" alt="" class="w-[80rem] md:w-[137.75rem] h-[25rem] md:h-[43.3125rem]" />
+			<img :src="getAssetPath('assets/background-2.svg')" alt="" class="w-[80rem] md:w-[137.75rem] h-[25rem] md:h-[43.3125rem]" />
 		</div>
 	</div>
 </template>
@@ -330,6 +330,7 @@
 import { ref } from 'vue'
 import Navigation from '@/components/Navigation.vue'
 import Button from '@/components/Button.vue'
+import { getAssetPath } from '@/utils/assets'
 
 const formData = ref({
 	email: '',
