@@ -1,0 +1,80 @@
+/**
+ * Radix Colors
+ * 
+ * To add more colors:
+ * 1. Import both light and dark versions here
+ * 2. Add the color scale to tailwind.config.js
+ * 
+ * Available colors: gray, mauve, slate, sage, olive, sand, gold, bronze,
+ * brown, yellow, amber, orange, tomato, red, ruby, crimson, pink, plum,
+ * purple, violet, iris, indigo, blue, cyan, teal, jade, green, grass, lime, mint, sky
+ */
+
+/* Radix Colors - Light Mode */
+@import "@radix-ui/colors/slate.css";
+@import "@radix-ui/colors/blue.css";
+@import "@radix-ui/colors/green.css";
+@import "@radix-ui/colors/red.css";
+@import "@radix-ui/colors/amber.css";
+@import "@radix-ui/colors/violet.css";
+@import "@radix-ui/colors/teal.css";
+@import "@radix-ui/colors/yellow.css";
+
+/* Radix Colors - Dark Mode */
+@import "@radix-ui/colors/slate-dark.css";
+@import "@radix-ui/colors/blue-dark.css";
+@import "@radix-ui/colors/green-dark.css";
+@import "@radix-ui/colors/red-dark.css";
+@import "@radix-ui/colors/amber-dark.css";
+@import "@radix-ui/colors/violet-dark.css";
+@import "@radix-ui/colors/teal-dark.css";
+@import "@radix-ui/colors/yellow-dark.css";
+
+/* Color System Variables */
+:root {
+	/* Backgrounds */
+	--color-background: var(--slate-1);
+	--color-background-subtle: var(--slate-2);
+	--color-background-hover: var(--slate-3);
+	
+	/* Borders */
+	--color-border: var(--slate-6);
+	--color-border-hover: var(--slate-7);
+	
+	/* Text */
+	--color-text-primary: var(--slate-12);
+	--color-text-secondary: var(--slate-11);
+	--color-text-tertiary: var(--slate-10);
+	
+	/* Primary (Blue) */
+	--color-primary: var(--blue-9);
+	--color-primary-hover: var(--blue-10);
+	--color-primary-text: var(--blue-11);
+	--color-primary-bg: var(--blue-3);
+	
+	/* Success (Green) */
+	--color-success: var(--green-9);
+	--color-success-hover: var(--green-10);
+	--color-success-text: var(--green-11);
+	--color-success-bg: var(--green-3);
+	
+	/* Error (Red) */
+	--color-error: var(--red-9);
+	--color-error-hover: var(--red-10);
+	--color-error-text: var(--red-11);
+	--color-error-bg: var(--red-3);
+	
+	/* Warning (Amber) */
+	--color-warning: var(--amber-9);
+	--color-warning-hover: var(--amber-10);
+	--color-warning-text: var(--amber-11);
+	--color-warning-bg: var(--amber-3);
+}
+
+/* Dark mode automatically switches to dark variants */
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+	}
+}
+
