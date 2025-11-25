@@ -3,7 +3,7 @@
 		<div class="header-content">
 			<!-- Logo -->
 			<div class="logo">
-				<img :src="getAssetPath('assets/comets-logo-mark.svg')" alt="Comets Logo" class="logo-img" />
+				<a href="#home"><img :src="getAssetPath('assets/comets-logo-mark.svg')" alt="Comets Logo" class="logo-img" /></a>
 			</div>
 
 			<!-- Navigation Links -->
@@ -33,7 +33,7 @@
 				<Button variant="primary">
 					Donate
 				</Button>
-				<Button variant="ghost" :show-label="false" @click="toggleMenu" class="lg:hidden">
+				<Button variant="ghost" :show-label="false" @click="toggleMenu" class="menu-button">
 					<template #iconBefore>
 						<IconMenu2 :size="24" />
 					</template>
@@ -86,7 +86,7 @@ onUnmounted(() => {
 <style scoped>
 .header {
 	position: fixed;
-	top: 2rem;
+	top: 1rem;
 	left: 0;
 	right: 0;
 	z-index: 50;
@@ -97,8 +97,8 @@ onUnmounted(() => {
 }
 
 .header-content {
-	background-color: rgba(0, 102, 102, 0.85);
-	backdrop-filter: blur(12px);
+	background-color: rgba(0, 102, 102, 0.80);
+	backdrop-filter: blur(1rem);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -143,6 +143,16 @@ onUnmounted(() => {
 	display: flex;
 	gap: 0.5rem;
 	align-items: center;
+}
+
+.menu-button {
+	display: block;
+}
+
+@media (min-width: 1024px) {
+	.menu-button {
+		display: none !important;
+	}
 }
 </style>
 
