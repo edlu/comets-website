@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-slate-1 flex flex-col items-center relative w-full min-h-screen overflow-x-hidden">
-		<!-- Navigation -->
-		<Navigation />
+		<!-- Navigation (hidden for now) -->
+		<Navigation v-if="false" />
 
 		<!-- Hero Video Section - Full Width -->
 		<section id="home" class="h-[30rem] md:h-[41.625rem] relative w-screen overflow-hidden -ml-[calc((100vw-100%)/2)] z-10">
