@@ -1,0 +1,16 @@
+/**
+ * Compiled design tokens and base styles for the app.
+ * Import this once in main.js for all pages.
+ */
+@import url("https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css");
+
+@import "./breakpoints.css";
+@import "./colors.css";
+@import "./sizes.css";
+@import "./spaces.css";
+@import "./shadows.css";
+@import "./typography.css";
+
+body {
+    transition: all 0.3s ease;
+}

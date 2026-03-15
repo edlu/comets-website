@@ -7,13 +7,14 @@
 		class="button"
 		:class="[
 			variantClasses,
+			sizeClass,
 			{ 'button--disabled': disabled }
 		]"
 		:disabled="disabled"
 		@click="handleClick"
 	>
 		<slot name="iconBefore" />
-		<span v-if="showLabel" class="label-wrapper" :class="labelWrapperClasses">
+		<span v-if="showLabel" class="label-wrapper">
 			<slot />
 		</span>
 		<slot name="iconAfter" />
@@ -30,11 +31,11 @@ const props = defineProps({
 		default: 'primary',
 		validator: (value) => ['primary', 'secondary', 'outline', 'ghost'].includes(value)
 	},
-	// Size: default, large, small
+	// Size: small, medium, large (sets font-size; padding scales via em)
 	size: {
 		type: String,
-		default: 'default',
-		validator: (value) => ['small', 'default', 'large'].includes(value)
+		default: 'medium',
+		validator: (value) => ['small', 'medium', 'large'].includes(value)
 	},
 	// Type for button tag
 	type: {
@@ -72,26 +73,11 @@ const tag = computed(() => {
 	return 'button'
 })
 
-// Variant classes based on Figma design
-const variantClasses = computed(() => {
-	const variants = {
-		primary: 'bg-yellow-9 text-yellow-12 hover:bg-yellow-10',
-		secondary: 'bg-teal-9 text-white hover:bg-teal-10',
-		outline: 'bg-transparent border-2 border-teal-9 text-teal-11 hover:bg-teal-3',
-		ghost: 'bg-transparent text-teal-1 hover:bg-black/20'
-	}
-	return variants[props.variant]
-})
+// Variant modifier class (styles use --color-* from colors.css)
+const variantClasses = computed(() => `button--${props.variant}`)
 
-// Label wrapper classes - padding goes here for proper icon-only sizing
-const labelWrapperClasses = computed(() => {
-	const wrapperSizes = {
-		small: 'px-[0.75rem]',
-		default: 'px-[1rem]',
-		large: 'px-[1.25rem]'
-	}
-	return wrapperSizes[props.size]
-})
+// Size sets font-size only; padding scales via em
+const sizeClass = computed(() => `button--${props.size}`)
 
 const handleClick = (event) => {
 	if (!props.disabled) {
@@ -103,45 +89,82 @@ const handleClick = (event) => {
 <style scoped>
 .button {
 	display: inline-flex;
-	gap: 0.5rem;
-	padding: 1rem;
+	gap: var(--space-em-0-5);
+	padding: var(--space-em-1);
 	align-items: center;
 	justify-content: center;
-	border-radius: 9999px; /* rounded-full */
-	font-weight: 500;
+	border-radius: 9999px;
+	font-family: var(--font-family-body);
+	font-weight: var(--font-weight-extra-bold);
+	line-height: var(--line-height-normal);
 	transition: all 0.2s ease;
 	cursor: pointer;
 	border: none;
 	text-decoration: none;
 }
 
+.button--small {
+	font-size: var(--font-size-small);
+}
+
+.button--medium {
+	font-size: var(--font-size-medium);
+}
+
+.button--large {
+	font-size: var(--font-size-large);
+}
+
+.button--primary {
+	background-color: var(--yellow-9);
+	color: var(--yellow-12);
+}
+.button--primary:hover {
+	background-color: var(--yellow-10);
+}
+
+.button--secondary {
+	background-color: var(--teal-9);
+	color: var(--teal-12);
+}
+.button--secondary:hover {
+	background-color: var(--teal-10);
+}
+
+.button--outline {
+	background-color: transparent;
+	border: 2px solid var(--teal-9);
+	color: var(--teal-11);
+}
+.button--outline:hover {
+	background-color: var(--teal-3);
+}
+
+.button--ghost {
+	background-color: transparent;
+	color: var(--teal-1);
+}
+.button--ghost:hover {
+	background-color: rgb(0 0 0 / 0.2);
+}
+
 .button--shadow {
 	box-shadow: 0px 83px 23px 0px rgba(0,0,0,0),
-							0px 53px 21px 0px rgba(0,0,0,0.01),
-							0px 30px 18px 0px rgba(0,0,0,0.02),
-							0px 13px 13px 0px rgba(0,0,0,0.04),
-							0px 3px 7px 0px rgba(0,0,0,0.05);
+				0px 53px 21px 0px rgba(0,0,0,0.01),
+				0px 30px 18px 0px rgba(0,0,0,0.02),
+				0px 13px 13px 0px rgba(0,0,0,0.04),
+				0px 3px 7px 0px rgba(0,0,0,0.05);
 }
 
 .label-wrapper {
 	display: flex;
-	gap: 0.5rem;
+	gap: var(--space-em-0-5);
 	align-items: center;
 	justify-content: center;
-	font-family: var(--font-family-montserrat);
-	font-weight: 500;
-	line-height: 0.96;
+	font-family: var(--font-family-body);
+	font-weight: var(--font-weight-extra-bold);
+	line-height: var(--line-height-normal);
 	white-space: nowrap;
-}
-
-/* Font sizes based on wrapper padding size */
-.label-wrapper.px-\[0\.75rem\],
-.label-wrapper.px-\[1rem\] {
-	font-size: var(--font-size-medium);
-}
-
-.label-wrapper.px-\[1\.25rem\] {
-	font-size: var(--font-size-large);
 }
 
 .button:active {
@@ -152,6 +175,7 @@ const handleClick = (event) => {
 	opacity: 0.5;
 	cursor: not-allowed;
 	pointer-events: none;
+	box-shadow: none;
 }
 </style>
 

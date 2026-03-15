@@ -26,7 +26,7 @@ defineProps({
 	padding: 0.75rem 1rem;
 	border-radius: 1rem;
 	color: var(--teal-1);
-	font-family: var(--font-family-montserrat);
+	font-family: var(--font-family-body);
 	font-size: var(--font-size-medium);
 	line-height: var(--line-height-medium);
 	font-weight: 500;

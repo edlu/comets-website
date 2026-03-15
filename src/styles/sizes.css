@@ -1,0 +1,17 @@
+/**
+ * Size scale – major third (1.25)
+ * 9 steps, 1rem (16px) = size-md (step 4)
+ */
+:root {
+	--size-3xs: 0.409375rem;   /* ~6.5px */
+	--size-2xs: 0.512rem;      /* ~8.2px */
+	--size-xs: 0.64rem;       /* ~10.2px */
+	--size-sm: 0.8rem;        /* 12.8px */
+	--size-md: 1rem;         /* 16px – base */
+	--size-lg: 1.25rem;       /* 20px */
+	--size-xl: 1.5625rem;     /* 25px */
+	--size-2xl: 1.953125rem;   /* ~31.25px */
+	--size-3xl: 2.44140625rem; /* ~39px */
+	--size-4xl: 3.0517578125rem; /* ~48.8px */
+	--size-5xl: 3.814697265625rem; /* ~61px */
+}

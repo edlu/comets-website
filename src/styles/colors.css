@@ -3,7 +3,7 @@
  * 
  * To add more colors:
  * 1. Import both light and dark versions here
- * 2. Add the color scale to tailwind.config.js
+ * 2. Add the color scale to style.css or layout.css if needed
  * 
  * Available colors: gray, mauve, slate, sage, olive, sand, gold, bronze,
  * brown, yellow, amber, orange, tomato, red, ruby, crimson, pink, plum,
@@ -47,11 +47,11 @@
 	--color-text-secondary: var(--slate-11);
 	--color-text-tertiary: var(--slate-10);
 	
-	/* Primary (Blue) */
-	--color-primary: var(--blue-9);
-	--color-primary-hover: var(--blue-10);
-	--color-primary-text: var(--blue-11);
-	--color-primary-bg: var(--blue-3);
+	/* Info (Blue) */
+	--color-info: var(--blue-9);
+	--color-info-hover: var(--blue-10);
+	--color-info-text: var(--blue-11);
+	--color-info-bg: var(--blue-3);
 	
 	/* Success (Green) */
 	--color-success: var(--green-9);
@@ -73,7 +73,7 @@
 }
 
 /* Dark mode automatically switches to dark variants */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
 	:root {
 		color-scheme: dark;
 	}

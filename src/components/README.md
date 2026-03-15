@@ -79,7 +79,7 @@ import Button from '@/components/Button.vue'
 | Prop | Type | Default | Options | Description |
 |------|------|---------|---------|-------------|
 | `variant` | String | `'primary'` | `'primary'`, `'secondary'`, `'outline'`, `'ghost'` | Button style variant |
-| `size` | String | `'default'` | `'small'`, `'default'`, `'large'` | Button size |
+| `size` | String | `'medium'` | `'small'`, `'medium'`, `'large'` | Font size (from typography scale) |
 | `type` | String | `'button'` | `'button'`, `'submit'`, `'reset'` | HTML button type |
 | `href` | String | `null` | Any URL | Renders as `<a>` tag with link |
 | `to` | String/Object | `null` | Vue Router path | Renders as `<router-link>` |
@@ -133,7 +133,7 @@ import Button from '@/components/Button.vue'
 #### Different Sizes
 ```vue
 <Button size="small">Small Button</Button>
-<Button size="default">Default Button</Button>
+<Button size="medium">Medium Button</Button>
 <Button size="large">Large Button</Button>
 ```
 

@@ -1,0 +1,38 @@
+/**
+ * Spacing scale – factor relative to 1rem
+ * e.g. --space-1 = 1rem, --space-0-5 = 0.5rem
+ */
+:root {
+	/* Scale: 0.25rem → 8rem */
+	--space-0: 0;
+	--space-0-25: 0.25rem;  /* 4px */
+	--space-0-5: 0.5rem;    /* 8px */
+	--space-0-75: 0.75rem;   /* 12px */
+	--space-1: 1rem;        /* 16px */
+	--space-1-25: 1.25rem;  /* 20px */
+	--space-1-5: 1.5rem;    /* 24px */
+	--space-2: 2rem;        /* 32px */
+	--space-2-5: 2.5rem;    /* 40px */
+	--space-3: 3rem;        /* 48px */
+	--space-4: 4rem;       /* 64px */
+	--space-5: 5rem;       /* 80px */
+	--space-6: 6rem;       /* 96px */
+	--space-8: 8rem;       /* 128px */
+
+	/* Scale in em – factor relative to 1em (inherits from font-size) */
+	--space-em-0: 0;
+	--space-em-0-25: 0.25em;
+	--space-em-0-5: 0.5em;
+	--space-em-0-75: 0.75em;
+	--space-em-1: 1em;
+	--space-em-1-25: 1.25em;
+	--space-em-1-5: 1.5em;
+	--space-em-2: 2em;
+	--space-em-2-5: 2.5em;
+	--space-em-3: 3em;
+	--space-em-4: 4em;
+	--space-em-5: 5em;
+	--space-em-6: 6em;
+	--space-em-8: 8em;
+
+}

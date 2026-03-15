@@ -1,21 +1,16 @@
 <template>
 	<header class="header">
 		<div class="header-content">
-			<!-- Logo -->
 			<div class="logo">
 				<a href="#home"><img :src="getAssetPath('assets/comets-logo-mark.svg')" alt="Comets Logo" class="logo-img" /></a>
 			</div>
 
-			<!-- Navigation Links -->
 			<nav class="nav">
 				<NavigationButton href="#home" :active="activeSection === 'home'">
 					Home
 				</NavigationButton>
-				<NavigationButton href="#age-groups" :active="activeSection === 'age-groups'">
-					Age Groups
-				</NavigationButton>
 				<NavigationButton href="#seasonal-programs" :active="activeSection === 'seasonal-programs'">
-					Seasonal Programs
+					Programs
 				</NavigationButton>
 				<NavigationButton href="#tournaments" :active="activeSection === 'tournaments'">
 					Tournaments
@@ -33,12 +28,9 @@
 				<Button variant="primary">
 					Donate
 				</Button>
-				<Button variant="ghost" :show-label="false" @click="toggleMenu" class="menu-button">
-					<template #iconBefore>
-						<IconMenu2 :size="24" />
-					</template>
-					Menu
-				</Button>
+				<NavigationButton class="menu-button" href="#sign-up" :active="activeSection === 'sign-up'">
+					<IconMenu2 :size="24" />
+				</NavigationButton>
 			</div>
 		</div>
 	</header>
@@ -85,31 +77,32 @@ onUnmounted(() => {
 
 <style scoped>
 .header {
-	position: fixed;
-	top: 1rem;
-	left: 0;
-	right: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 0 var(--space-1);
+	position: sticky;
+	top: 0;
+	background-color: var(--teal-9);
 	z-index: 50;
-	padding: 0 0.5rem;
-	max-width: 90rem;
-	margin: 0 auto;
-	width: 100%;
+}
+
+@media (min-width: 48rem) {
+	.header {
+		padding: 0 var(--space-2);
+	}
 }
 
 .header-content {
-	background-color: rgba(0, 102, 102, 0.80);
-	backdrop-filter: blur(1rem);
+	background-color: var(--teal-9);
+	width: 100%;
+	max-width: var(--breakpoint-desktop-xlarge);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0.5rem 1rem;
-	border-radius: 1rem;
-}
-
-@media (min-width: 768px) {
-	.header-content {
-		padding: 0.5rem 2rem;
-	}
+	gap: var(--space-1);
+	padding: var(--space-1) var(--space-2);
 }
 
 .logo {
@@ -118,22 +111,16 @@ onUnmounted(() => {
 }
 
 .logo-img {
-	height: 1.75rem;
-}
-
-@media (min-width: 768px) {
-	.logo-img {
-		height: 2.25rem;
-	}
+	height: var(--space-3);
 }
 
 .nav {
 	display: none;
-	gap: 0.75rem;
+	gap: var(--space-1);
 	align-items: center;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 48rem) {
 	.nav {
 		display: flex;
 	}
@@ -149,9 +136,9 @@ onUnmounted(() => {
 	display: block;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 48rem) {
 	.menu-button {
-		display: none !important;
+		display: none;
 	}
 }
 </style>
