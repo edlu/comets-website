@@ -6,7 +6,7 @@
 		</video>
 	</section>
 	<main>
-		<img :src="getAssetPath('assets/comet-tail-bg.svg')" class="comet-tail-bg-top" aria-hidden="true" alt="" />
+		<!-- <img :src="getAssetPath('assets/comet-tail-bg.svg')" class="comet-tail-bg-top" aria-hidden="true" /> -->
 		
 		<section class="title">
 				<div class="logo-comets-wrapper"><img :src="getAssetPath('assets/comets-logo.png')" alt="Culver City Comets Logo" class="logo-comets" /></div>
@@ -198,6 +198,7 @@ main {
 
 section {
 	width: 100%;
+	min-width: 0; /* allow flex child to shrink so padding is respected when viewport < content width */
 	max-width: var(--breakpoint-desktop-xlarge);
 	padding: var(--space-1);
 	display: flex;
@@ -213,16 +214,22 @@ section {
 	}
 }
 
+@media (min-width: 90rem) {
+	section {
+		padding: var(--space-4);
+	}
+}
+
 .comet-tail-bg-top {
 	position: absolute;
 	z-index: 0;
-	left: 50%;
+	margin: auto;
 	top: -10rem;
 	transform: rotate(135deg);
 	pointer-events: none;
-	width: 50rem;
-	height: 25rem;
-	/* object-fit: contain; */
+	width: 25%;
+	/* height: 25rem; */
+	object-fit: contain;
 }
 
 @media (min-width: 48rem) {
@@ -255,12 +262,13 @@ section {
 	display: flex;
 	flex-direction: column;
 	gap: 0;
+	justify-content: flex-start;
 	align-items: center;
 	padding-top: 0;
-	top: calc(var(--space-2) * -3);
+	top: calc(var(--space-6) * -1);
 
 	.logo-comets-wrapper {
-		width: 45%;
+		width: 40%;
 		display: grid;
 		place-items: center;
 		padding: 0 var(--space-1);
@@ -297,7 +305,7 @@ section {
 		}
 
 		.intro {
-			padding: 0 var(--space-2);
+			padding: 0 var(--space-4);
 		}
 	}
 }
@@ -305,11 +313,16 @@ section {
 @media (min-width: 48rem) {
 	.title {
 		flex-direction: row;
+		justify-content: flex-start;
 		align-items: flex-start;
 		top: calc(var(--space-2) * -1);
 		
 		.logo-comets-wrapper {
-			align-items: flex-start;
+			position: relative;
+			width: 30%;
+			padding: 0;
+			top: calc(var(--space-3) * -1);
+
 		}
 		
 		.title__content .headings {
@@ -324,20 +337,21 @@ section {
 	flex-direction: column;
 	gap: var(--space-2);
 	width: 100%;
-	max-width: 80rem;
+	max-width: 90rem;
 }
 
 .age-groups__list {
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-3);
-	width: 100%;
+	min-width: 0; /* allow flex child to shrink so section padding is respected */
 	
 	.age-group-card {
 	display: inline-flex;
 	flex-direction: column;
 	gap: var(--space-1);
 	flex: 1;
+	min-width: 0; /* allow flex child to shrink so section padding is respected */
 
 		.age-group-card__thumb {
 		height: 15rem;
@@ -362,8 +376,12 @@ section {
 }
 
 @media (min-width: 48rem) {
+	.age-groups {
+		margin: var(--space-2);
+	}
 	.age-groups__list {
 		flex-direction: row;
+		gap: var(--space-1);
 	}
 }
 
