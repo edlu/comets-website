@@ -36,36 +36,42 @@
 			<h2>AGE GROUPS</h2>
 			<div class="age-groups__list">
 				<div class="age-group-card">
-					<div class="age-group-card__thumb"></div>
+					<div class="age-group-card__thumb">
+						<img src="https://picsum.photos/seed/littlesticks/400/225" alt="Little Sticks" class="age-group-card__thumb-image" />
+					</div>
 					<div class="age-group-card__header">
 						<div class="age-group-card__meta">
 							<h3 class="age-group-card__title">LITTLE STICKS</h3>
-							<p class="age-group-card__label">Age 4-7</p>
+							<h4 class="age-group-card__label">Age 4-7</h4>
 						</div>
 					</div>
-					<p>Introduction to lacrosse fundamentals through fun games and activities. Focus on basic skills and love of the game.</p>
+					<p class="age-group-card__description">Introduction to lacrosse fundamentals through fun games and activities. Focus on basic skills and love of the game.</p>
 					<Button variant="primary">Register</Button>
 				</div>
 				<div class="age-group-card">
-					<div class="age-group-card__thumb"></div>
+					<div class="age-group-card__thumb">
+						<img src="https://picsum.photos/seed/youth/400/225" alt="Youth" class="age-group-card__thumb-image" />
+					</div>
 					<div class="age-group-card__header">
 						<div class="age-group-card__meta">
 							<h3 class="age-group-card__title">YOUTH</h3>
-							<p class="age-group-card__label">Age 8-12</p>
+								<h4 class="age-group-card__label">Age 8-12</h4>
 						</div>
 					</div>
-					<p>Develop core skills and game understanding through practices and competitive play.</p>
+					<p class="age-group-card__description">Develop core skills and game understanding through practices and competitive play.</p>
 					<Button variant="primary">Register</Button>
 				</div>
 				<div class="age-group-card">
-					<div class="age-group-card__thumb"></div>
+					<div class="age-group-card__thumb">
+						<img src="https://picsum.photos/seed/upper/400/225" alt="Upper" class="age-group-card__thumb-image" />
+					</div>
 					<div class="age-group-card__header">
 						<div class="age-group-card__meta">
 							<h3 class="age-group-card__title">UPPER</h3>
-							<p class="age-group-card__label">Age 13-17</p>
+							<h4 class="age-group-card__label">Age 13-17</h4>
 						</div>	
 					</div>
-					<p>Advanced training for competitive players looking to excel at the highest level of youth lacrosse.</p>
+					<p class="age-group-card__description">Advanced training for competitive players looking to excel at the highest level of youth lacrosse.</p>
 					<Button variant="primary">Register</Button>
 				</div>
 			</div>
@@ -194,13 +200,15 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	gap: 0;
 }
 
 section {
+	box-sizing: border-box;
 	width: 100%;
 	min-width: 0; /* allow flex child to shrink so padding is respected when viewport < content width */
 	max-width: var(--breakpoint-desktop-xlarge);
-	padding: var(--space-1);
+	padding: 0 var(--space-1);
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-1);
@@ -352,12 +360,21 @@ section {
 	gap: var(--space-1);
 	flex: 1;
 	min-width: 0; /* allow flex child to shrink so section padding is respected */
+	box-shadow: var(--shadow-2);
 
 		.age-group-card__thumb {
 		height: 15rem;
 		width: 100%;
 		background: #fff;
 		border-top: 2px solid var(--teal-9);
+		overflow: hidden;
+
+			.age-group-card__thumb-image {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
 		}
 
 		.age-group-card__header {
@@ -372,12 +389,16 @@ section {
 			flex-direction: column;
 			gap: var(--space-1);
 		}
+
+		.age-group-card__description {
+			flex: 1;
+		}
 	}
 }
 
 @media (min-width: 48rem) {
 	.age-groups {
-		margin: var(--space-2);
+		padding: var(--space-2);
 	}
 	.age-groups__list {
 		flex-direction: row;

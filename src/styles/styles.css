@@ -2,7 +2,7 @@
  * Compiled design tokens and base styles for the app.
  * Import this once in main.js for all pages.
  */
-@import url("https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css");
+@import url("https://cdn.jsdelivr.net/npm/sanitize.css@13/sanitize.min.css");
 
 @import "./breakpoints.css";
 @import "./colors.css";
