@@ -95,7 +95,7 @@ onUnmounted(() => {
 }
 
 .header-content {
-	background-color: var(--teal-9);
+	/* background-color: var(--teal-9); */
 	width: 100%;
 	max-width: var(--breakpoint-desktop-xlarge);
 	display: flex;

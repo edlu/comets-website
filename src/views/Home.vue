@@ -77,7 +77,7 @@
 			</div>
 		</section>
 
-		<!-- <section id="seasonal-programs">
+		<section id="seasonal-programs">
 			<h2 class="section-title">SEASONAL PROGRAMS</h2>
 			<p class="section-intro">We're active throughout the year for all age groups. Practices take place in evenings about twice a week with regular weekend games against other regional youth teams.</p>
 			<div class="seasonal-grid">
@@ -170,7 +170,7 @@
 				<Button type="submit" variant="primary">Submit</Button>
 			</form>
 			<img :src="getAssetPath('assets/background-2.svg')" class="comet-tail-bg-bottom" aria-hidden="true" alt="" />
-		</section> -->
+		</section>
 	</main>
 </template>
 
