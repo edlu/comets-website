@@ -6,29 +6,26 @@
 			</div>
 
 			<nav class="nav">
-				<NavigationButton href="#home" :active="activeSection === 'home'">
+				<NavigationButton to="/" :active="route.name === 'home'">
 					Home
 				</NavigationButton>
-				<NavigationButton href="#seasonal-programs" :active="activeSection === 'seasonal-programs'">
+				<NavigationButton to="/programs" :active="route.name === 'programs'">
 					Programs
 				</NavigationButton>
-				<NavigationButton href="#tournaments" :active="activeSection === 'tournaments'">
-					Tournaments
+				<NavigationButton to="/about" :active="route.name === 'about'">
+					About
 				</NavigationButton>
-				<NavigationButton href="#faqs" :active="activeSection === 'faqs'">
-					FAQs
-				</NavigationButton>
-				<NavigationButton href="#sign-up" :active="activeSection === 'sign-up'">
-					Sign Up
+				<NavigationButton to="/faq" :active="route.name === 'faq'">
+					FAQ
 				</NavigationButton>
 			</nav>
 
-			<!-- Donate + Menu -->
+			<!-- Register + Menu -->
 			<div class="donate-menu">
-				<Button variant="primary">
-					Donate
+				<Button variant="primary" to="/register">
+					Register
 				</Button>
-				<NavigationButton class="menu-button" href="#sign-up" :active="activeSection === 'sign-up'">
+				<NavigationButton class="menu-button" to="/register">
 					<IconMenu2 :size="24" />
 				</NavigationButton>
 			</div>
@@ -37,42 +34,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { IconMenu2 } from '@tabler/icons-vue'
 import Button from './Button.vue'
 import NavigationButton from './NavigationButton.vue'
 import { getAssetPath } from '@/utils/assets'
 
-const activeSection = ref('home')
-const menuOpen = ref(false)
-
-const toggleMenu = () => {
-	menuOpen.value = !menuOpen.value
-}
-
-const updateActiveSection = () => {
-	const sections = ['home', 'age-groups', 'seasonal-programs', 'tournaments', 'faqs', 'sign-up']
-	
-	for (const section of sections) {
-		const element = document.getElementById(section)
-		if (element) {
-			const rect = element.getBoundingClientRect()
-			if (rect.top <= 150 && rect.bottom >= 150) {
-				activeSection.value = section
-				break
-			}
-		}
-	}
-}
-
-onMounted(() => {
-	window.addEventListener('scroll', updateActiveSection)
-	updateActiveSection()
-})
-
-onUnmounted(() => {
-	window.removeEventListener('scroll', updateActiveSection)
-})
+const route = useRoute()
 </script>
 
 <style scoped>

@@ -11,6 +11,10 @@
 @import "./shadows.css";
 @import "./typography.css";
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     transition: all 0.3s ease;
 }

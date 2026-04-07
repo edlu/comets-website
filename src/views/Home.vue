@@ -25,7 +25,7 @@
 						<p class="large">
 							Newcomers are always welcome to visit or participate in trial practices. Just let us know in advance.
 						</p>
-						<Button variant="primary">
+						<Button variant="primary" to="/register">
 							Schedule a Visit
 						</Button>
 					</div>
@@ -46,7 +46,7 @@
 						</div>
 					</div>
 					<p class="age-group-card__description">Introduction to lacrosse fundamentals through fun games and activities. Focus on basic skills and love of the game.</p>
-					<Button variant="primary">Register</Button>
+					<Button variant="primary" to="/register">Register</Button>
 				</div>
 				<div class="age-group-card">
 					<div class="age-group-card__thumb">
@@ -59,7 +59,7 @@
 						</div>
 					</div>
 					<p class="age-group-card__description">Develop core skills and game understanding through practices and competitive play.</p>
-					<Button variant="primary">Register</Button>
+					<Button variant="primary" to="/register">Register</Button>
 				</div>
 				<div class="age-group-card">
 					<div class="age-group-card__thumb">
@@ -72,126 +72,21 @@
 						</div>	
 					</div>
 					<p class="age-group-card__description">Advanced training for competitive players looking to excel at the highest level of youth lacrosse.</p>
-					<Button variant="primary">Register</Button>
+					<Button variant="primary" to="/register">Register</Button>
 				</div>
 			</div>
 		</section>
 
-		<section id="seasonal-programs">
-			<h2 class="section-title">SEASONAL PROGRAMS</h2>
-			<p class="section-intro">We're active throughout the year for all age groups. Practices take place in evenings about twice a week with regular weekend games against other regional youth teams.</p>
-			<div class="seasonal-grid">
-				<div class="seasonal-item">
-					<h3 class="seasonal-item__title">SPRING</h3>
-					<p class="seasonal-item__range">Mar - May</p>
-					<ul class="seasonal-item__list">
-						<li>10 weeks</li>
-						<li>Saturday games</li>
-					</ul>
-				</div>
-				<div class="seasonal-item">
-					<h3 class="seasonal-item__title">SUMMER</h3>
-					<p class="seasonal-item__range">Jun - Aug</p>
-					<ul class="seasonal-item__list">
-						<li>Summer camp</li>
-						<li>X weeks</li>
-					</ul>
-				</div>
-				<div class="seasonal-item">
-					<h3 class="seasonal-item__title">FALL</h3>
-					<p class="seasonal-item__range">Sep - Nov</p>
-					<ul class="seasonal-item__list">
-						<li>7 weeks</li>
-						<li>Box format</li>
-						<li>Sunday games</li>
-					</ul>
-				</div>
-				<div class="seasonal-item">
-					<h3 class="seasonal-item__title">WINTER</h3>
-					<p class="seasonal-item__range">Dec - Feb</p>
-					<ul class="seasonal-item__list">
-						<li>7 weeks</li>
-						<li>Sixes format</li>
-						<li>Saturday Games</li>
-					</ul>
-				</div>
-			</div>
-		</section>
-
-		<section id="tournaments" class="tournaments">
-			<h2 class="section-title">TOURNAMENTS</h2>
-			<div class="tournaments__wrap">
-				<div class="tournaments__content">
-					<p class="section-intro">Our competitive travel teams participate in tournaments throughout California. These teams are for dedicated players looking to compete at a higher level and represent our community.</p>
-					<div class="tournaments__list">
-						<div class="tournament-item">
-							<h3 class="tournament-item__title">10U</h3>
-							<p class="tournament-item__desc">Our youngest competitive team focused on fundamentals and game experience.</p>
-						</div>
-						<div class="tournament-item">
-							<h3 class="tournament-item__title">12U</h3>
-							<p class="tournament-item__desc">Building skills and lacrosse IQ through competitive tournament play.</p>
-						</div>
-						<div class="tournament-item">
-							<h3 class="tournament-item__title">14U</h3>
-							<p class="tournament-item__desc">Advanced training and competition. Preparing for high school play.</p>
-						</div>
-						<div class="tournament-item">
-							<h3 class="tournament-item__title">HIGH SCHOOL</h3>
-							<p class="tournament-item__desc">Elite competition with college recruitment opportunities.</p>
-						</div>
-					</div>
-				</div>
-				<div class="tournaments__visual" aria-hidden="true"></div>
-			</div>
-		</section>
-
-		<section id="sign-up" class="sign-up">
-			<h2 class="sign-up__title">CONTACT US FOR A FREE TRIAL PRACTICE</h2>
-			<p class="sign-up__intro">Starter equipment for trials and beginners are provided. We'll reach out and coordinate scheduling.</p>
-			<form class="sign-up__form" @submit.prevent="handleSubmit">
-				<div class="form-group">
-					<label class="form-label">Parent's Email</label>
-					<input type="email" v-model="formData.email" placeholder="Enter email" class="form-input" />
-				</div>
-				<div class="form-group">
-					<label class="form-label">Child's Name</label>
-					<input type="text" v-model="formData.childName" placeholder="Child's Name" class="form-input" />
-				</div>
-				<div class="form-group">
-					<label class="form-label">Child's Age Group</label>
-					<select v-model="formData.ageGroup" class="form-input">
-						<option value="">Select Age Group</option>
-						<option value="4-7">Little Sticks (4-7)</option>
-						<option value="8-12">Youth (8-12)</option>
-						<option value="13-17">Upper (13-17)</option>
-					</select>
-				</div>
-				<Button type="submit" variant="primary">Submit</Button>
-			</form>
-			<img :src="getAssetPath('assets/background-2.svg')" class="comet-tail-bg-bottom" aria-hidden="true" alt="" />
-		</section>
+		<!-- Seasonal Programs and Tournaments sections to be built out on the Programs page -->
 	</main>
+	<SignUpForm />
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import Navigation from '@/components/Navigation.vue'
 import Button from '@/components/Button.vue'
+import SignUpForm from '@/components/SignUpForm.vue'
 import { getAssetPath } from '@/utils/assets'
-
-const formData = ref({
-	email: '',
-	childName: '',
-	ageGroup: ''
-})
-
-const handleSubmit = () => {
-	console.log('Form submitted:', formData.value)
-	// Add form submission logic here
-	alert('Thank you! We will contact you soon.')
-	formData.value = { email: '', childName: '', ageGroup: '' }
-}
 </script>
 
 <style scoped>
@@ -397,9 +292,6 @@ section {
 }
 
 @media (min-width: 48rem) {
-	.age-groups {
-		padding: var(--space-2);
-	}
 	.age-groups__list {
 		flex-direction: row;
 		gap: var(--space-1);

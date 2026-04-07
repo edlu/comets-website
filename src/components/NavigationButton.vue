@@ -1,18 +1,26 @@
 <template>
-	<a
-		:href="href"
+	<component
+		:is="to ? 'RouterLink' : 'a'"
+		:to="to || undefined"
+		:href="to ? undefined : href"
 		class="nav-button"
 		:class="{ 'nav-button--active': active }"
 	>
 		<slot />
-	</a>
+	</component>
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router'
+
 defineProps({
 	href: {
 		type: String,
-		required: true
+		default: null
+	},
+	to: {
+		type: [String, Object],
+		default: null
 	},
 	active: {
 		type: Boolean,

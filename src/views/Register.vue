@@ -1,8 +1,8 @@
 <template>
 	<Navigation />
 	<main class="page">
-		<h1>About Us</h1>
-		<p>Our mission, coaching staff, values, and what makes the Culver City Comets community special.</p>
+		<h1>Register</h1>
+		<p>Pricing, how to sign up, and what to expect when you join the Culver City Comets.</p>
 	</main>
 	<SignUpForm />
 </template>
@@ -19,4 +19,3 @@ import SignUpForm from '@/components/SignUpForm.vue'
 	padding: var(--space-4);
 }
 </style>
-
