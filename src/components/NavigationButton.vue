@@ -1,6 +1,6 @@
 <template>
 	<component
-		:is="to ? 'RouterLink' : 'a'"
+		:is="to ? RouterLink : 'a'"
 		:to="to || undefined"
 		:href="to ? undefined : href"
 		class="nav-button"

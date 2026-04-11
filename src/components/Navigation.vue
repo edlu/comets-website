@@ -2,7 +2,7 @@
 	<header class="header">
 		<div class="header-content">
 			<div class="logo">
-				<a href="#home"><img :src="getAssetPath('assets/comets-logo-mark.svg')" alt="Comets Logo" class="logo-img" /></a>
+				<RouterLink to="/"><img :src="getAssetPath('assets/comets-logo-mark.svg')" alt="Comets Logo" class="logo-img" /></RouterLink>
 			</div>
 
 			<nav class="nav">
@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import { IconMenu2 } from '@tabler/icons-vue'
 import Button from './Button.vue'
 import NavigationButton from './NavigationButton.vue'

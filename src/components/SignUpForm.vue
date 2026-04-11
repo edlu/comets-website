@@ -36,7 +36,6 @@ const formData = ref({
 })
 
 const handleSubmit = () => {
-	console.log('Form submitted:', formData.value)
 	alert('Thank you! We will contact you soon.')
 	formData.value = { email: '', childName: '', ageGroup: '' }
 }
