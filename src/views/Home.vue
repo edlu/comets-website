@@ -46,7 +46,7 @@
 						</div>
 					</div>
 					<p class="age-group-card__description">Introduction to lacrosse fundamentals through fun games and activities. Focus on basic skills and love of the game.</p>
-					<Button variant="primary" to="/register">Register</Button>
+					<Button variant="primary" :to="{ path: '/register', query: { ageGroup: '4-7' } }">Register</Button>
 				</div>
 				<div class="age-group-card">
 					<div class="age-group-card__thumb">
@@ -59,7 +59,7 @@
 						</div>
 					</div>
 					<p class="age-group-card__description">Develop core skills and game understanding through practices and competitive play.</p>
-					<Button variant="primary" to="/register">Register</Button>
+					<Button variant="primary" :to="{ path: '/register', query: { ageGroup: '8-12' } }">Register</Button>
 				</div>
 				<div class="age-group-card">
 					<div class="age-group-card__thumb">
@@ -72,7 +72,7 @@
 						</div>	
 					</div>
 					<p class="age-group-card__description">Advanced training for competitive players looking to excel at the highest level of youth lacrosse.</p>
-					<Button variant="primary" to="/register">Register</Button>
+					<Button variant="primary" :to="{ path: '/register', query: { ageGroup: '13-17' } }">Register</Button>
 				</div>
 			</div>
 		</section>
@@ -432,7 +432,7 @@ section {
 	background-color: var(--teal-5);
 	display: flex;
 	flex-direction: column;
-	gap: var(--space-8);
+	gap: var(--space-3);
 	align-items: center;
 	justify-content: center;
 	padding: var(--space-8) var(--space-4);

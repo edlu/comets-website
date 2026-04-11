@@ -15,9 +15,9 @@
 				<label class="form-label">Child's Age Group</label>
 				<select v-model="formData.ageGroup" class="form-input">
 					<option value="">Select Age Group</option>
-					<option value="4-7">Little Sticks (4-7)</option>
-					<option value="8-12">Youth (8-12)</option>
-					<option value="13-17">Upper (13-17)</option>
+					<option value="4-7">Little Sticks (4-7 years old)</option>
+					<option value="8-12">Youth (8-12 years old)</option>
+					<option value="13-17">Upper (13-17 years old)</option>
 				</select>
 			</div>
 			<Button type="submit" variant="primary">Submit</Button>
@@ -26,8 +26,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import Button from './Button.vue'
+
+const AGE_GROUP_VALUES = ['4-7', '8-12', '13-17']
+
+const route = useRoute()
 
 const formData = ref({
 	email: '',
@@ -35,9 +40,24 @@ const formData = ref({
 	ageGroup: ''
 })
 
+function ageGroupFromQuery() {
+	const raw = route.query.ageGroup
+	const value = Array.isArray(raw) ? raw[0] : raw
+	return typeof value === 'string' && AGE_GROUP_VALUES.includes(value) ? value : ''
+}
+
+watch(
+	() => route.query.ageGroup,
+	() => {
+		const next = ageGroupFromQuery()
+		if (next) formData.value.ageGroup = next
+	},
+	{ immediate: true }
+)
+
 const handleSubmit = () => {
 	alert('Thank you! We will contact you soon.')
-	formData.value = { email: '', childName: '', ageGroup: '' }
+	formData.value = { email: '', childName: '', ageGroup: ageGroupFromQuery() }
 }
 </script>
 
