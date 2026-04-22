@@ -219,7 +219,14 @@ section {
 		justify-content: flex-start;
 		align-items: flex-start;
 		top: calc(var(--space-2) * -1);
-		
+		max-width: none;
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		padding-top: var(--space-2);
+		padding-bottom: var(--space-2);
+		padding-right: 0;
+		padding-left: calc(max(0px, (100vw - var(--breakpoint-desktop-xlarge)) / 2) + var(--space-2));
+
 		.logo-comets-wrapper {
 			position: relative;
 			width: 30%;
@@ -227,10 +234,25 @@ section {
 			top: calc(var(--space-3) * -1);
 
 		}
-		
+
+		.title__content {
+			flex: 1;
+			min-width: 0;
+		}
+
 		.title__content .headings {
 			border-radius: 0 0 0 var(--space-2);
+			width: 100%;
+			box-sizing: border-box;
 		}
+	}
+}
+
+@media (min-width: 90rem) {
+	.title {
+		padding-top: var(--space-4);
+		padding-bottom: var(--space-4);
+		padding-left: calc(max(0px, (100vw - var(--breakpoint-desktop-xlarge)) / 2) + var(--space-4));
 	}
 }
 
