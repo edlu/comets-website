@@ -1,226 +1,107 @@
 # Culver City Comets Website
 
-A Vue 3 application built with Vite.
+A Vue 3 single-page app for Culver City Youth Lacrosse, built with Vite.
 
-## Features
+## Stack
 
-- **Vue 3** with Composition API
-- **Vue Router** for navigation
-- **Pinia** for state management
-- **Tailwind CSS** for utility-first styling
-- **Radix Colors** for accessible color system
-- **Tabler Icons** for beautiful SVG icons
-- **Vite** for fast development and building
+- **Vue 3** (Composition API, `<script setup>`)
+- **Vue Router** for client-side routing
+- **Pinia** for state (available if you add stores)
+- **Vite** for dev server and production builds
+- **Radix Colors** (`@radix-ui/colors`) — imported in `src/styles/colors.css`, used as CSS variables (e.g. `var(--teal-9)`)
+- **Tabler Icons** (`@tabler/icons-vue`) for UI icons
+- **VueUse Motion** (`@vueuse/motion`) — scroll-triggered section animations on the home page
 
-## Getting Started
+Styling is **scoped CSS in Vue components** plus shared tokens in `src/styles/` (not Tailwind).
 
-### Install Dependencies
-
-```bash
-npm install
-```
-
-### Development Server
+## Scripts
 
 ```bash
-npm run dev
+npm install    # install dependencies
+npm run dev    # dev server (default http://localhost:5173)
+npm run build  # production build → dist/
+npm run preview # serve dist/ locally
 ```
 
-The app will be available at `http://localhost:5173`
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-## Project Structure
+## Project structure
 
 ```
 public/
-└── assets/
-    ├── logo.png              # Culver City Comets logo
-    ├── comets-logo-mark.svg    # Header logo icon
-    ├── background-1.svg      # Decorative background (top)
-    ├── background-2.svg      # Decorative background (bottom)
-    ├── caret-down.svg        # Dropdown icon
-    ├── hero-video.mp4        # Hero video (add your own)
-    └── README.md             # Assets documentation
+└── assets/              # static files (served as-is)
+    ├── comets-logo.png
+    ├── comets-logo-mark.svg       # header mark (white)
+    ├── comets-logo-mark-teal.svg  # teal mark (e.g. favicon)
+    ├── hero-video.mp4
+    └── …
+
+index.html               # root HTML; favicon link → public/assets/
 
 src/
-├── App.vue          # Root component
-├── main.js          # Application entry point
-├── style.css        # Global styles with Tailwind
-├── styles/
-│   └── colors.css   # Radix Colors configuration
+├── main.js              # app bootstrap, Pinia, Router, Motion plugin
+├── App.vue
+├── router/index.js      # routes
+├── utils/
+│   ├── assets.js              # getAssetPath() for base-aware public URLs
+│   └── trialSignupEmail.js    # signup notification (Web3Forms + mailto fallback)
+├── styles/              # global CSS (imported from main.js)
+│   ├── styles.css
+│   ├── colors.css
+│   ├── typography.css
+│   ├── spaces.css
+│   └── breakpoints.css
 ├── components/
-│   ├── Button.vue            # Reusable button component
-│   ├── Navigation.vue        # Header navigation component
-│   ├── NavigationButton.vue  # Navigation link component
-│   └── README.md             # Component documentation
-├── router/
-│   └── index.js     # Router configuration
+│   ├── Navigation.vue       # sticky header; mobile slide-over menu
+│   ├── NavigationButton.vue
+│   ├── Button.vue
+│   ├── SignUpForm.vue       # trial/contact form (highlight + plain variants)
+│   └── HeroMediaCarousel.vue # hero: images + video, autoplay, crossfade
 └── views/
-    ├── Home.vue     # Home page
-    └── About.vue    # About page
+    ├── Home.vue
+    ├── About.vue
+    ├── Programs.vue
+    ├── Register.vue
+    └── FAQ.vue
 ```
 
-## Assets
+More detail on exported graphics: `public/assets/README.md`.
 
-All graphic and video assets from Figma have been imported to `/public/assets/`:
+## Routes
 
-- ✅ **Logo** (130KB PNG) - Main Culver City Comets logo
-- ✅ **Icon** (2KB SVG) - Small logo for header navigation
-- ✅ **Backgrounds** (1.5KB each SVG) - Decorative patterns
-- ✅ **Icons** (938B SVG) - UI icons (dropdown, etc.)
-- ✅ **Video** - Hero video playing on homepage
+| Path | View | Notes |
+|------|------|--------|
+| `/` | `Home.vue` | Hero carousel, intro, age groups, testimonials, motion |
+| `/about` | `About.vue` | |
+| `/programs` | `Programs.vue` | Seasonal copy + placeholder figures |
+| `/register` | `Register.vue` | Uses `SignUpForm` with `variant="plain"` |
+| `/faq` | `FAQ.vue` | Accordion-style FAQ |
 
-See `public/assets/README.md` for detailed asset documentation.
+## Notable UI behavior
+
+- **Navigation:** Below `40rem` width, primary links live in a **mobile menu** (hamburger). From `40rem` up, inline nav links show and the menu button is hidden.
+- **Hero:** `HeroMediaCarousel` cycles slides (images and/or video) with prev/next, keyboard support, and optional autoplay timing.
+- **Sign-up form:** Client-side validation, honeypot + short time gate for light bot friction, full-width submit. Submissions are sent via **[Web3Forms](https://web3forms.com)** when `VITE_WEB3FORMS_ACCESS_KEY` is set (configure the destination inbox in the Web3Forms dashboard—no recipient address in client code). If the key is missing, the app falls back to a **mailto** draft; the inbox address is built at runtime from character codes in `trialSignupEmail.js` so it is not stored as a plain literal string. Copy `.env.example` to `.env` or `.env.local` and add your key for production.
+- **Home testimonials:** Rotating quotes with directional transitions; click or timed advance.
+- **Motion:** `@vueuse/motion` is registered globally; home sections and age-group cards use `v-motion` with `visible-once` for scroll-in effects.
+
+## Breakpoints (CSS variables)
+
+Defined in `src/styles/breakpoints.css`:
+
+- `--breakpoint-phone`: 40rem (640px)
+- `--breakpoint-tablet`: 48rem (768px)
+- `--breakpoint-desktop`: 64rem (1024px)
+- …and larger desktop steps
+
+Use in CSS: `@media (min-width: 40rem) { … }` (plain `rem` values work everywhere; custom properties inside `@media` can be unreliable in some browsers).
+
+## Favicon
+
+`index.html` points the favicon at **`assets/comets-logo-mark-teal.svg`**. Swap the `href` if you change the asset name.
 
 ## Components
 
-### Navigation Component
+See `src/components/README.md` for older component notes. Prefer reading the `.vue` sources for up-to-date props and usage.
 
-Sticky header with automatic active section highlighting.
+---
 
-```vue
-<script setup>
-import Navigation from '@/components/Navigation.vue'
-</script>
-
-<template>
-	<Navigation />
-</template>
-```
-
-### Button Component
-
-Reusable button component with multiple variants.
-
-```vue
-<script setup>
-import Button from '@/components/Button.vue'
-</script>
-
-<template>
-	<!-- Primary (Yellow) Button -->
-	<Button variant="primary">Register</Button>
-	
-	<!-- Secondary (Teal) Button -->
-	<Button variant="secondary">Learn More</Button>
-	
-	<!-- Outline Button -->
-	<Button variant="outline">Contact</Button>
-	
-	<!-- Different Sizes -->
-	<Button size="small">Small</Button>
-	<Button size="large">Large</Button>
-	
-	<!-- As Link -->
-	<Button to="/about">About Us</Button>
-</template>
-```
-
-See `src/components/README.md` for full documentation.
-
-## Responsive Design
-
-The website is fully responsive with mobile-first breakpoints:
-
-### Breakpoints
-
-- **Mobile**: < 640px (base styles)
-- **Small (sm)**: ≥ 640px (landscape mobile / small tablets)
-- **Medium (md)**: ≥ 768px (tablets)
-- **Large (lg)**: ≥ 1024px (desktops)
-
-### Mobile Adaptations
-
-**Navigation:**
-- Hidden on mobile/tablet (< 1024px)
-- Full navigation visible on desktop
-
-**Hero Section:**
-- Height: 30rem on mobile → 41.625rem on desktop
-- Logo: 16rem on mobile → 24.5rem on desktop
-
-**Layout:**
-- All horizontal sections stack vertically on mobile
-- Age Groups: 1 column → 3 columns
-- Seasonal Programs: 1 column → 4 columns (wrapping at 2)
-- Tournaments: 1 column → 2 columns
-
-**Spacing:**
-- Reduced padding on mobile (1rem → 2rem on md+)
-- Reduced gaps for better mobile layout
-
-**Form:**
-- Full width on mobile
-- Fixed width on desktop (21.0625rem)
-
-## Styling
-
-### Tailwind CSS + Radix Colors
-
-The project uses **Tailwind CSS configured exclusively with Radix Colors**. Default Tailwind colors have been completely replaced with Radix color scales to prevent conflicts.
-
-**Only Radix colors are available** in Tailwind classes:
-
-```vue
-<div class="bg-teal-3 text-teal-11 border border-teal-6">
-  Beautiful accessible colors!
-</div>
-```
-
-**Currently available color scales:** `slate`, `blue`, `green`, `red`, `amber`, `violet`, `teal`, `yellow` (steps 1-12 each)
-
-**Essential colors preserved:** `transparent`, `current`, `white`, `black`
-
-**Note:** Standard Tailwind colors (like `bg-blue-500`, `text-gray-800`) are NOT available. Use Radix scales instead (like `bg-teal-9`, `text-teal-12`).
-
-### Design System
-
-**Primary Colors:**
-- Teal (from Radix): Used for primary UI elements and navigation
-- Yellow (from Radix): Used for call-to-action buttons
-
-**Typography:**
-- **Headings:** Agdasima (Bold, 700 weight)
-- **Body:** Montserrat (Regular 400, Medium 500, SemiBold 600, Bold 700)
-
-**Font Sizes:**
-- H1: 64px (Agdasima)
-- H2: 48px (Agdasima)  
-- H3: 36px (Agdasima)
-- H4: 24px (Agdasima)
-- Large: 20px (Montserrat)
-- Medium: 16px (Montserrat)
-
-#### Adding More Radix Colors
-
-To add additional Radix color scales (e.g., `purple`, `orange`):
-1. Import them in `src/styles/colors.css`
-2. Add the scale mapping to `tailwind.config.js`
-
-### Tabler Icons
-
-Import icons from `@tabler/icons-vue`:
-
-```vue
-<script setup>
-import { IconHome, IconUser } from '@tabler/icons-vue'
-</script>
-
-<template>
-  <IconHome :size="24" />
-</template>
-```
-
-Browse icons at: https://tabler.io/icons
-
+If you deploy under a subpath (e.g. GitHub Pages), set `base` via **`BASE_PATH`** when building (see `vite.config.js`) and use `getAssetPath()` from `@/utils/assets` for public asset URLs in JavaScript.

@@ -54,6 +54,7 @@ h1, h2 {
 	font-weight: var(--font-weight-extra-bold);
 	color: var(--teal-12);
 	margin: 0;
+	text-transform: uppercase;
 }
 
 h2,h3, h4, h5, h6 {

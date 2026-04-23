@@ -16,7 +16,7 @@
 				<div class="title__content">
 					<div class="headings">
 					  <h1>CULVER CITY YOUTH LACROSSE</h1>
-					  <h2>GROWING LACROSSE IN OUR COMMUNITY!</h2>
+					  <h2>GROWING LACROSSE IN OUR COMMUNITY</h2>
 					</div>
 					<div class="intro">
 						<p class="large">
@@ -210,8 +210,8 @@ const testimonials = [
 	{
 		id: 't1',
 		quote:
-			'Our son found his confidence this season. Coaches are positive, organized, and the kids genuinely have fun every practice.',
-		author: 'Melissa R.'
+			'We LOVE the CC Youth LAX community! This is the best of what youth sports should be. Fun. Challenging. Positive.',
+		author: 'Mitchell S.'
 	},
 	{
 		id: 't2',

@@ -77,8 +77,13 @@
 					{{ errors.ageGroup }}
 				</p>
 			</div>
+			<p v-if="submitFeedback" class="form-feedback" :class="{ 'form-feedback--error': submitIsError }" role="status">
+				{{ submitFeedback }}
+			</p>
 			<div class="sign-up__submit">
-				<Button type="submit" variant="primary">Submit</Button>
+				<Button type="submit" variant="primary" :disabled="submitting">
+					{{ submitting ? 'Sending…' : 'Submit' }}
+				</Button>
 			</div>
 		</form>
 	</section>
@@ -88,6 +93,7 @@
 import { onMounted, reactive, ref, useId, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Button from './Button.vue'
+import { sendTrialSignupRequest } from '@/utils/trialSignupEmail'
 
 defineProps({
 	/** `highlight`: full-width teal band (home page). `plain`: no band, for standalone pages. */
@@ -135,6 +141,10 @@ const honeypot = ref('')
 
 /** Shown only when submit is blocked by the time gate (rare for real users). */
 const submitGateError = ref('')
+
+const submitting = ref(false)
+const submitFeedback = ref('')
+const submitIsError = ref(false)
 
 const formOpenedAt = ref(0)
 onMounted(() => {
@@ -202,8 +212,19 @@ function runValidation() {
 	return !errors.email && !errors.childName && !errors.ageGroup
 }
 
-const handleSubmit = () => {
+function resetAfterSuccess() {
+	formData.value = { email: '', childName: '', ageGroup: ageGroupFromQuery() }
+	errors.email = ''
+	errors.childName = ''
+	errors.ageGroup = ''
+	honeypot.value = ''
+	formOpenedAt.value = Date.now()
+}
+
+const handleSubmit = async () => {
 	clearSubmitGateError()
+	submitFeedback.value = ''
+	submitIsError.value = false
 
 	if (honeypot.value.trim() !== '') {
 		return
@@ -217,13 +238,33 @@ const handleSubmit = () => {
 
 	if (!runValidation()) return
 
-	alert('Thank you! We will contact you soon.')
-	formData.value = { email: '', childName: '', ageGroup: ageGroupFromQuery() }
-	errors.email = ''
-	errors.childName = ''
-	errors.ageGroup = ''
-	honeypot.value = ''
-	formOpenedAt.value = Date.now()
+	submitting.value = true
+	try {
+		const result = await sendTrialSignupRequest({
+			parentEmail: formData.value.email.trim(),
+			childName: formData.value.childName.trim(),
+			ageGroup: formData.value.ageGroup
+		})
+
+		if (result.ok) {
+			resetAfterSuccess()
+			submitIsError.value = false
+			if (result.mode === 'mailto') {
+				submitFeedback.value =
+					'If your email app opened, send the message to finish. If not, copy your details and email the program from your inbox.'
+			} else {
+				submitFeedback.value = 'Thank you! We will contact you soon.'
+			}
+		} else {
+			submitIsError.value = true
+			submitFeedback.value = result.error || 'Something went wrong. Please try again.'
+		}
+	} catch {
+		submitIsError.value = true
+		submitFeedback.value = 'Network error. Please try again.'
+	} finally {
+		submitting.value = false
+	}
 }
 </script>
 
@@ -345,6 +386,21 @@ const handleSubmit = () => {
 .form-error--banner {
 	align-self: stretch;
 	text-align: center;
+}
+
+.form-feedback {
+	margin: 0;
+	align-self: stretch;
+	text-align: center;
+	font-family: var(--font-family-body);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-relaxed);
+	font-weight: 600;
+	color: var(--color-success-text);
+}
+
+.form-feedback--error {
+	color: var(--color-error-text);
 }
 
 .sign-up--plain {

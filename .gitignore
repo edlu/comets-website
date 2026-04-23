@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Local secrets (Web3Forms key, etc.)
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
