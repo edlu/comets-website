@@ -411,11 +411,19 @@ section {
 	}
 }
 
+/* Desktop+: pull title block up more than tablet so it visibly overlaps the hero (padding otherwise eats the offset). */
+@media (min-width: 64rem) {
+	.title {
+		top: calc(var(--space-6) * -1);
+	}
+}
+
 @media (min-width: 90rem) {
 	.title {
 		padding-top: var(--space-4);
 		padding-bottom: var(--space-4);
 		padding-left: calc(max(0px, (100vw - var(--breakpoint-desktop-xlarge)) / 2) + var(--space-4));
+		top: calc(var(--space-8) * -1);
 	}
 }
 
