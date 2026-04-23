@@ -1,9 +1,7 @@
 <template>
 	<Navigation />
 	<section class="hero">
-		<video autoPlay controlsList="nodownload" loop playsInline muted>
-			<source :src="getAssetPath('assets/hero-video.mp4')" type="video/mp4" />
-		</video>
+		<HeroMediaCarousel :slides="heroSlides" />
 	</section>
 	<main>
 		<!-- <img :src="getAssetPath('assets/comet-tail-bg.svg')" class="comet-tail-bg-top" aria-hidden="true" /> -->
@@ -13,20 +11,23 @@
 				<div class="title__content">
 					<div class="headings">
 					  <h1>CULVER CITY YOUTH LACROSSE</h1>
-					  <h2>Home of the Culver City Comets</h2>
+					  <h2>GROWING LACROSSE IN OUR COMMUNITY!</h2>
 					</div>
 					<div class="intro">
 						<p class="large">
-						<strong>Culver City Youth Lacrosse</strong> is a community youth program dedicated to developing young athletes through the sport of lacrosse. We foster a culture where effort, personal growth and teamwork are our measures of success and victory not just goals and wins.
+							A passionate community-based youth program dedicated to developing young athletes through the sport of Lacrosse.
 						</p>
 						<p class="large">
-							Our program serves boys and girls from ages 4-17. With teams at various levels and skill divisions. Whether your child is new to the sport or looking to advance their skills - we have a place for them!
+							We foster a culture where EFFORT, PERSONAL GROWTH and TEAMWORK are the measure of success, not just goals and wins.
 						</p>
 						<p class="large">
-							Newcomers are always welcome to visit or participate in trial practices. Just let us know in advance.
+							Our programs are available <strong>YEAR-ROUND</strong> for BOYS & GIRLS age 4-17.
+						</p>
+						<p class="large">
+							ALL skills levels welcome!  Whether your child is new to Lacrosse or wants to advance their skills we have a place for them.
 						</p>
 						<Button variant="primary" to="/register">
-							Schedule a Visit
+							Schedule a Free Trial Practice
 						</Button>
 					</div>
 				</div>
@@ -85,8 +86,24 @@
 <script setup>
 import Navigation from '@/components/Navigation.vue'
 import Button from '@/components/Button.vue'
+import HeroMediaCarousel from '@/components/HeroMediaCarousel.vue'
 import SignUpForm from '@/components/SignUpForm.vue'
 import { getAssetPath } from '@/utils/assets'
+
+/** Hero carousel: mix `image` and `video` slides; swap `src` / `alt` for your own assets. */
+const heroSlides = [
+	{ type: 'video', src: getAssetPath('assets/hero-video.mp4'), alt: 'Youth lacrosse highlights' },
+	{
+		type: 'image',
+		src: 'https://picsum.photos/seed/comets-hero-a/1600/900',
+		alt: 'Players on the field'
+	},
+	{
+		type: 'image',
+		src: 'https://picsum.photos/seed/comets-hero-b/1600/900',
+		alt: 'Team practice'
+	}
+]
 </script>
 
 <style scoped>
@@ -151,12 +168,11 @@ section {
 	padding: 0;
 	z-index: 1;
 
-	& video {
-		position: relative;
-		z-index: 1;
+	& :deep(.carousel) {
+		position: absolute;
+		inset: 0;
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
 	}
 }
 
