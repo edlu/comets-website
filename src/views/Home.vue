@@ -6,7 +6,12 @@
 	<main>
 		<!-- <img :src="getAssetPath('assets/comet-tail-bg.svg')" class="comet-tail-bg-top" aria-hidden="true" /> -->
 		
-		<section class="title">
+		<section
+			class="title"
+			v-motion
+			:initial="sectionMotionInitial"
+			:visible-once="sectionMotionVisible(120)"
+		>
 				<div class="logo-comets-wrapper"><img :src="getAssetPath('assets/comets-logo.png')" alt="Culver City Comets Logo" class="logo-comets" /></div>
 				<div class="title__content">
 					<div class="headings">
@@ -33,10 +38,20 @@
 				</div>
 		</section>	
 
-		<section class="age-groups">
+		<section
+			class="age-groups"
+			v-motion
+			:initial="sectionMotionInitial"
+			:visible-once="sectionMotionVisible(160)"
+		>
 			<h2>AGE GROUPS</h2>
 			<div class="age-groups__list">
-				<div class="age-group-card">
+				<div
+					class="age-group-card"
+					v-motion
+					:initial="cardMotionInitial"
+					:visible-once="cardMotionVisible(140)"
+				>
 					<div class="age-group-card__thumb">
 						<img src="https://picsum.photos/seed/littlesticks/400/225" alt="Little Sticks" class="age-group-card__thumb-image" />
 					</div>
@@ -49,7 +64,12 @@
 					<p class="age-group-card__description">Introduction to lacrosse fundamentals through fun games and activities. Focus on basic skills and love of the game.</p>
 					<Button variant="primary" :to="{ path: '/register', query: { ageGroup: '4-7' } }">Register</Button>
 				</div>
-				<div class="age-group-card">
+				<div
+					class="age-group-card"
+					v-motion
+					:initial="cardMotionInitial"
+					:visible-once="cardMotionVisible(300)"
+				>
 					<div class="age-group-card__thumb">
 						<img src="https://picsum.photos/seed/youth/400/225" alt="Youth" class="age-group-card__thumb-image" />
 					</div>
@@ -62,7 +82,12 @@
 					<p class="age-group-card__description">Develop core skills and game understanding through practices and competitive play.</p>
 					<Button variant="primary" :to="{ path: '/register', query: { ageGroup: '8-12' } }">Register</Button>
 				</div>
-				<div class="age-group-card">
+				<div
+					class="age-group-card"
+					v-motion
+					:initial="cardMotionInitial"
+					:visible-once="cardMotionVisible(460)"
+				>
 					<div class="age-group-card__thumb">
 						<img src="https://picsum.photos/seed/upper/400/225" alt="Upper" class="age-group-card__thumb-image" />
 					</div>
@@ -78,12 +103,54 @@
 			</div>
 		</section>
 
+		<section
+			class="testimonials"
+			aria-labelledby="testimonials-heading"
+			v-motion
+			:initial="sectionMotionInitial"
+			:visible-once="sectionMotionVisible(200)"
+		>
+			<div class="testimonials__header">
+				<h2 id="testimonials-heading">PARENT TESTIMONIALS</h2>
+				<p class="large">Here's what families are saying about Culver City Youth Lacrosse</p>
+			</div>
+
+			<div
+				class="testimonials__carousel"
+				role="region"
+				aria-label="Parent testimonials"
+				@mouseenter="setAutoplayPaused(true)"
+				@mouseleave="setAutoplayPaused(false)"
+				@focusin="setAutoplayPaused(true)"
+				@focusout="setAutoplayPaused(false)"
+				@click="nextTestimonial"
+			>
+				<figure class="testimonial-card">
+					<Transition name="testimonial-quote" mode="out-in">
+						<blockquote :key="`quote-${activeTestimonial.id}`" class="testimonial-card__quote">
+							“{{ activeTestimonial.quote }}”
+						</blockquote>
+					</Transition>
+					<Transition name="testimonial-author" mode="out-in">
+						<figcaption :key="`author-${activeTestimonial.id}`" class="testimonial-card__author">
+							— {{ activeTestimonial.author }}
+						</figcaption>
+					</Transition>
+				</figure>
+			</div>
+		</section>
+
 		<!-- Seasonal Programs and Tournaments sections to be built out on the Programs page -->
 	</main>
-	<SignUpForm />
+	<SignUpForm
+		v-motion
+		:initial="sectionMotionInitial"
+		:visible-once="sectionMotionVisible(240)"
+	/>
 </template>
 
 <script setup>
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import Navigation from '@/components/Navigation.vue'
 import Button from '@/components/Button.vue'
 import HeroMediaCarousel from '@/components/HeroMediaCarousel.vue'
@@ -104,6 +171,86 @@ const heroSlides = [
 		alt: 'Team practice'
 	}
 ]
+
+const sectionMotionInitial = { opacity: 0, y: 36 }
+const cardMotionInitial = { opacity: 0, y: 26, scale: 0.985 }
+
+function sectionMotionVisible(delay = 0) {
+	return {
+		opacity: 1,
+		y: 0,
+		transition: {
+			type: 'spring',
+			stiffness: 90,
+			damping: 18,
+			mass: 0.7,
+			delay
+		}
+	}
+}
+
+function cardMotionVisible(delay = 0) {
+	return {
+		opacity: 1,
+		y: 0,
+		scale: 1,
+		transition: {
+			type: 'spring',
+			stiffness: 110,
+			damping: 20,
+			mass: 0.65,
+			delay
+		}
+	}
+}
+
+const TESTIMONIAL_INTERVAL_MS = 4000
+
+const testimonials = [
+	{
+		id: 't1',
+		quote:
+			'Our son found his confidence this season. Coaches are positive, organized, and the kids genuinely have fun every practice.',
+		author: 'Melissa R.'
+	},
+	{
+		id: 't2',
+		quote:
+			'As a new lacrosse family, we felt welcomed right away. Communication is clear and the player development has been excellent.',
+		author: 'Daniel K.'
+	},
+	{
+		id: 't3',
+		quote:
+			'The program balances skill-building and teamwork perfectly. My daughter loves coming to training and games each week.',
+		author: 'Angela T.'
+	}
+]
+
+const activeTestimonialIndex = ref(0)
+const autoplayPaused = ref(false)
+
+const activeTestimonial = computed(() => testimonials[activeTestimonialIndex.value])
+
+let testimonialIntervalId = null
+
+function setAutoplayPaused(next) {
+	autoplayPaused.value = next
+}
+
+function nextTestimonial() {
+	activeTestimonialIndex.value = (activeTestimonialIndex.value + 1) % testimonials.length
+}
+
+onMounted(() => {
+	testimonialIntervalId = window.setInterval(() => {
+		if (!autoplayPaused.value) nextTestimonial()
+	}, TESTIMONIAL_INTERVAL_MS)
+})
+
+onUnmounted(() => {
+	if (testimonialIntervalId) window.clearInterval(testimonialIntervalId)
+})
 </script>
 
 <style scoped>
@@ -234,7 +381,7 @@ section {
 		flex-direction: row;
 		justify-content: flex-start;
 		align-items: flex-start;
-		top: calc(var(--space-2) * -1);
+		top: calc(var(--space-4) * -1);
 		max-width: none;
 		width: 100vw;
 		margin-left: calc(50% - 50vw);
@@ -333,6 +480,115 @@ section {
 	.age-groups__list {
 		flex-direction: row;
 		gap: var(--space-1);
+	}
+}
+
+.testimonials {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+	padding-top: var(--space-4);
+	padding-bottom: var(--space-4);
+}
+
+.testimonials__header {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-1);
+}
+
+.testimonials__header p {
+	margin: 0;
+	color: var(--color-text-secondary);
+}
+
+.testimonials__carousel {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+	cursor: pointer;
+}
+
+.testimonial-card {
+	margin: var(--space-1);
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+	min-height: 10rem;
+	padding: var(--space-1) 0;
+	position: relative;
+}
+
+.testimonial-card__quote {
+	margin: 0 var(--space-1);
+	font-size: var(--font-size-h3);
+	line-height: var(--line-height-relaxed);
+	color: var(--teal-12);
+	font-style: italic;
+	font-weight: var(--font-weight-thin);
+}
+
+@media (min-width: var(--breakpoint-phone)) {
+	.testimonial-card__quote {
+		margin: 0 var(--space-6);
+	}
+}
+
+.testimonial-card__author {
+	margin: 0;
+	font-size: var(--font-size-medium);
+	font-weight: var(--font-weight-bold);
+	color: var(--teal-11);
+	align-self: flex-end;
+	text-align: right;
+}
+
+.testimonial-quote-enter-active,
+.testimonial-quote-leave-active {
+	transition:
+		opacity 0.45s ease,
+		transform 0.55s cubic-bezier(0.22, 0.9, 0.28, 1),
+		filter 0.45s ease;
+}
+
+.testimonial-quote-enter-from {
+	opacity: 0;
+	transform: translateX(-1.2rem) scale(0.985);
+	filter: blur(2px);
+}
+
+.testimonial-quote-leave-to {
+	opacity: 0;
+	transform: translateX(0.8rem) scale(0.985);
+	filter: blur(2px);
+}
+
+.testimonial-author-enter-active,
+.testimonial-author-leave-active {
+	transition:
+		opacity 0.45s ease,
+		transform 0.55s cubic-bezier(0.22, 0.9, 0.28, 1),
+		filter 0.45s ease;
+}
+
+.testimonial-author-enter-from {
+	opacity: 0;
+	transform: translateX(1.2rem) scale(0.985);
+	filter: blur(2px);
+}
+
+.testimonial-author-leave-to {
+	opacity: 0;
+	transform: translateX(-0.8rem) scale(0.985);
+	filter: blur(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.testimonial-quote-enter-active,
+	.testimonial-quote-leave-active,
+	.testimonial-author-enter-active,
+	.testimonial-author-leave-active {
+		transition-duration: 0.01ms;
 	}
 }
 

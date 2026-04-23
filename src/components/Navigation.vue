@@ -198,7 +198,6 @@ onUnmounted(() => {
 }
 
 .header-content {
-	/* background-color: var(--teal-9); */
 	width: 100%;
 	max-width: var(--breakpoint-desktop-xlarge);
 	display: flex;
@@ -223,7 +222,7 @@ onUnmounted(() => {
 	align-items: center;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 40rem) {
 	.nav {
 		display: flex;
 	}
@@ -239,7 +238,7 @@ onUnmounted(() => {
 	display: block;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 40rem) {
 	.menu-button {
 		display: none;
 	}
@@ -266,6 +265,12 @@ onUnmounted(() => {
 .menu-toggle:focus-visible {
 	outline: 2px solid var(--teal-1);
 	outline-offset: 2px;
+}
+
+@media (min-width: 40rem) {
+	.menu-toggle.menu-button {
+		display: none;
+	}
 }
 </style>
 
