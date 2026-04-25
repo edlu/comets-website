@@ -16,7 +16,7 @@
 				<div class="title__content">
 					<div class="headings">
 					  <h1>CULVER CITY YOUTH LACROSSE</h1>
-					  <h2>GROWING LACROSSE IN OUR COMMUNITY</h2>
+					  <h2>PLAY LAX WITH US!</h2>
 					</div>
 					<div class="intro">
 						<p class="large">
@@ -53,7 +53,7 @@
 					:visible-once="cardMotionVisible(140)"
 				>
 					<div class="age-group-card__thumb">
-						<img src="https://picsum.photos/seed/littlesticks/400/225" alt="Little Sticks" class="age-group-card__thumb-image" />
+						<img :src="getAssetPath('assets/ages-little-sticks.jpg')" alt="Little Sticks" class="age-group-card__thumb-image" />
 					</div>
 					<div class="age-group-card__header">
 						<div class="age-group-card__meta">
@@ -71,7 +71,7 @@
 					:visible-once="cardMotionVisible(300)"
 				>
 					<div class="age-group-card__thumb">
-						<img src="https://picsum.photos/seed/youth/400/225" alt="Youth" class="age-group-card__thumb-image" />
+						<img :src="getAssetPath('assets/ages-youth.jpg')" alt="Youth" class="age-group-card__thumb-image" />
 					</div>
 					<div class="age-group-card__header">
 						<div class="age-group-card__meta">
@@ -89,7 +89,7 @@
 					:visible-once="cardMotionVisible(460)"
 				>
 					<div class="age-group-card__thumb">
-						<img src="https://picsum.photos/seed/upper/400/225" alt="Upper" class="age-group-card__thumb-image" />
+						<img :src="getAssetPath('assets/ages-upper.jpg')" alt="Upper" class="age-group-card__thumb-image" />
 					</div>
 					<div class="age-group-card__header">
 						<div class="age-group-card__meta">
@@ -159,15 +159,34 @@ import { getAssetPath } from '@/utils/assets'
 
 /** Hero carousel: mix `image` and `video` slides; swap `src` / `alt` for your own assets. */
 const heroSlides = [
-	{ type: 'video', src: getAssetPath('assets/hero-video.mp4'), alt: 'Youth lacrosse highlights' },
-	{
-		type: 'image',
-		src: 'https://picsum.photos/seed/comets-hero-a/1600/900',
-		alt: 'Players on the field'
+	{ 
+		type: 'video',
+		src: getAssetPath('assets/hero1.mp4'),
+		alt: 'Youth lacrosse highlights'
 	},
 	{
 		type: 'image',
-		src: 'https://picsum.photos/seed/comets-hero-b/1600/900',
+		src: getAssetPath('assets/hero2.jpg'),
+		alt: 'K-1 Team Celebration'
+	},
+	{
+		type: 'image',
+		src: getAssetPath('assets/hero3.jpg'),
+		alt: 'K-1 Team Celebration'
+	},
+	{
+		type: 'image',
+		src: getAssetPath('assets/hero4.jpg'),
+		alt: 'Team practice'
+	},
+	{
+		type: 'image',
+		src: getAssetPath('assets/hero5.jpg'),
+		alt: 'Team practice'
+	},
+	{
+		type: 'image',
+		src: getAssetPath('assets/hero6.jpg'),
 		alt: 'Team practice'
 	}
 ]
@@ -357,10 +376,11 @@ section {
 			border-radius: 0;
 
 			h1 { 
-				margin-bottom: var(--space-1); 
+				margin-bottom: 0; 
 				color: var(--teal-1);
 			}
 			h2 {
+				margin-top: 0;
 				color: var(--teal-3);
 			}
 		}
@@ -371,7 +391,7 @@ section {
 		}
 
 		.intro {
-			padding: 0 var(--space-4);
+			padding: 0 var(--space-2);
 		}
 	}
 }
@@ -454,7 +474,8 @@ section {
 		height: 15rem;
 		width: 100%;
 		background: #fff;
-		border-top: 2px solid var(--teal-9);
+		border-top: 4px solid var(--teal-9);
+		border-radius: 0 0 var(--space-1) var(--space-1);
 		overflow: hidden;
 
 			.age-group-card__thumb-image {
