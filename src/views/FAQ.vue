@@ -146,7 +146,7 @@ import SignUpForm from '@/components/SignUpForm.vue'
 .faq-item summary {
 	font-family: var(--font-family-display);
 	font-weight: var(--font-weight-bold);
-	font-size: var(--font-size-h5);
+	font-size: var(--font-size-h4);
 	line-height: var(--line-height-normal);
 	padding: var(--space-2) 0;
 	cursor: pointer;
