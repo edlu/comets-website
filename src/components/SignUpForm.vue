@@ -19,6 +19,25 @@
 				/>
 			</div>
 			<div class="form-group">
+				<label class="form-label" :for="ids.parentName">Parent's Name</label>
+				<input
+					:id="ids.parentName"
+					v-model="formData.parentName"
+					type="text"
+					name="parentName"
+					autocomplete="name"
+					placeholder="Parent's Name"
+					class="form-input"
+					:class="{ 'form-input--error': errors.parentName }"
+					:aria-invalid="errors.parentName ? 'true' : 'false'"
+					:aria-describedby="errors.parentName ? ids.parentNameErr : undefined"
+					@input="onParentNameInput"
+				/>
+				<p v-if="errors.parentName" :id="ids.parentNameErr" class="form-error" role="alert">
+					{{ errors.parentName }}
+				</p>
+			</div>
+			<div class="form-group">
 				<label class="form-label" :for="ids.email">Parent's Email</label>
 				<input
 					:id="ids.email"
@@ -44,7 +63,7 @@
 					v-model="formData.childName"
 					type="text"
 					name="childName"
-					autocomplete="name"
+					autocomplete="off"
 					placeholder="Child's Name"
 					class="form-input"
 					:class="{ 'form-input--error': errors.childName }"
@@ -115,6 +134,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const route = useRoute()
 const uid = useId()
 const ids = {
+	parentName: `${uid}-parent`,
+	parentNameErr: `${uid}-parent-err`,
 	email: `${uid}-email`,
 	emailErr: `${uid}-email-err`,
 	childName: `${uid}-child`,
@@ -125,12 +146,14 @@ const ids = {
 }
 
 const formData = ref({
+	parentName: '',
 	email: '',
 	childName: '',
 	ageGroup: ''
 })
 
 const errors = reactive({
+	parentName: '',
 	email: '',
 	childName: '',
 	ageGroup: ''
@@ -153,6 +176,11 @@ onMounted(() => {
 
 function clearSubmitGateError() {
 	submitGateError.value = ''
+}
+
+function onParentNameInput() {
+	errors.parentName = ''
+	clearSubmitGateError()
 }
 
 function onEmailInput() {
@@ -192,9 +220,9 @@ function validateEmail(value) {
 	return ''
 }
 
-function validateChildName(value) {
+function validateName(value, emptyMessage) {
 	const t = value.trim()
-	if (!t) return "Please enter your child's name."
+	if (!t) return emptyMessage
 	if (t.length < 2) return 'Name must be at least 2 characters.'
 	if (t.length > 120) return 'Name is too long.'
 	return ''
@@ -206,14 +234,16 @@ function validateAgeGroup(value) {
 }
 
 function runValidation() {
+	errors.parentName = validateName(formData.value.parentName, 'Please enter your name.')
 	errors.email = validateEmail(formData.value.email)
-	errors.childName = validateChildName(formData.value.childName)
+	errors.childName = validateName(formData.value.childName, "Please enter your child's name.")
 	errors.ageGroup = validateAgeGroup(formData.value.ageGroup)
-	return !errors.email && !errors.childName && !errors.ageGroup
+	return !errors.parentName && !errors.email && !errors.childName && !errors.ageGroup
 }
 
 function resetAfterSuccess() {
-	formData.value = { email: '', childName: '', ageGroup: ageGroupFromQuery() }
+	formData.value = { parentName: '', email: '', childName: '', ageGroup: ageGroupFromQuery() }
+	errors.parentName = ''
 	errors.email = ''
 	errors.childName = ''
 	errors.ageGroup = ''
@@ -241,6 +271,7 @@ const handleSubmit = async () => {
 	submitting.value = true
 	try {
 		const result = await sendTrialSignupRequest({
+			parentName: formData.value.parentName.trim(),
 			parentEmail: formData.value.email.trim(),
 			childName: formData.value.childName.trim(),
 			ageGroup: formData.value.ageGroup

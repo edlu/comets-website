@@ -19,11 +19,12 @@ const AGE_LABELS = {
 	'13-17': 'Upper (13–17 years old)'
 }
 
-export function formatTrialSignupMessage({ parentEmail, childName, ageGroup }) {
+export function formatTrialSignupMessage({ parentName, parentEmail, childName, ageGroup }) {
 	const ageLine = AGE_LABELS[ageGroup] || ageGroup
 	return [
 		'New trial signup request (Comets website form)',
 		'',
+		`Parent name: ${parentName}`,
 		`Parent email: ${parentEmail}`,
 		`Child's name: ${childName}`,
 		`Age group: ${ageLine}`,
@@ -35,8 +36,8 @@ export function formatTrialSignupMessage({ parentEmail, childName, ageGroup }) {
 /**
  * @returns {{ ok: true, mode: 'web3'|'mailto' } | { ok: false, error: string }}
  */
-export async function sendTrialSignupRequest({ parentEmail, childName, ageGroup }) {
-	const message = formatTrialSignupMessage({ parentEmail, childName, ageGroup })
+export async function sendTrialSignupRequest({ parentName, parentEmail, childName, ageGroup }) {
+	const message = formatTrialSignupMessage({ parentName, parentEmail, childName, ageGroup })
 	const subject = 'Comets website: trial signup request'
 	const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
@@ -51,7 +52,7 @@ export async function sendTrialSignupRequest({ parentEmail, childName, ageGroup 
 				body: JSON.stringify({
 					access_key: accessKey,
 					subject,
-					name: `Trial signup — ${childName}`,
+					name: parentName,
 					email: parentEmail,
 					message
 				})
