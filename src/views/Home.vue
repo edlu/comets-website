@@ -487,6 +487,10 @@ section {
 	margin: 0;
 }
 
+.age-group-card__label {
+	color: var(--color-text-secondary);
+}
+
 @media (min-width: 48rem) {
 	.age-groups__list {
 		flex-direction: row;
