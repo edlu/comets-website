@@ -14,13 +14,12 @@
 			<figure class="section-media">
 				<img
 					class="section-media__img media-frame"
-					src="https://picsum.photos/seed/programs-fall/1200/675"
-					width="1200"
-					height="675"
-					alt=""
+					:src="getAssetPath('assets/programs-fall.jpg')"
+					width="1600"
+					height="1066"
+					alt="A Comets player catches a pass during a box lacrosse game on an outdoor rink"
 					loading="lazy"
 				/>
-				<figcaption class="section-media__caption">Placeholder — fall / box lacrosse</figcaption>
 			</figure>
 			<p class="large">
 				Fast-paced, high-rep version of lacrosse played on a roller hockey rink.
@@ -49,13 +48,12 @@
 			<figure class="section-media">
 				<img
 					class="section-media__img media-frame"
-					src="https://picsum.photos/seed/programs-winter/1200/675"
-					width="1200"
-					height="675"
-					alt=""
+					:src="getAssetPath('assets/programs-winter.jpg')"
+					width="1600"
+					height="900"
+					alt="A Comets player protects the ball while two opponents reach in with their sticks"
 					loading="lazy"
 				/>
-				<figcaption class="section-media__caption">Placeholder — winter / sixes</figcaption>
 			</figure>
 			<p class="large">
 				<strong>Olympic format:</strong> fast-paced games (5 field players + 1 goalie per team). Quick transitions,
@@ -80,13 +78,12 @@
 			<figure class="section-media">
 				<img
 					class="section-media__img media-frame"
-					src="https://picsum.photos/seed/programs-spring/1200/675"
-					width="1200"
-					height="675"
-					alt=""
+					:src="getAssetPath('assets/programs-spring.jpg')"
+					width="1600"
+					height="1066"
+					alt="A Comets player takes a face-off against an opponent as the referee looks on"
 					loading="lazy"
 				/>
-				<figcaption class="section-media__caption">Placeholder — spring / field season</figcaption>
 			</figure>
 			<p class="large">
 				Full-field play for boys 5th grade and up. Our 2nd / 3rd / 4th graders play set positions and follow more
@@ -107,13 +104,12 @@
 			<figure class="section-media section-media--inset">
 				<img
 					class="section-media__img media-frame"
-					src="https://picsum.photos/seed/programs-travel/1200/675"
-					width="1200"
-					height="675"
-					alt=""
+					:src="getAssetPath('assets/programs-tournament.jpg')"
+					width="1024"
+					height="683"
+					alt="Three Comets players hug on the field during a tournament game"
 					loading="lazy"
 				/>
-				<figcaption class="section-media__caption">Placeholder — tournament / travel team</figcaption>
 			</figure>
 			<p class="large tournament__copy">
 				Culver City Comets offer a competitive travel team as well that participates in tournaments throughout
@@ -133,6 +129,7 @@
 import { RouterLink } from 'vue-router'
 import Navigation from '@/components/Navigation.vue'
 import SignUpForm from '@/components/SignUpForm.vue'
+import { getAssetPath } from '@/utils/assets'
 </script>
 
 <style scoped>
@@ -161,10 +158,6 @@ import SignUpForm from '@/components/SignUpForm.vue'
 .section-media__img {
 	aspect-ratio: 16 / 9;
 	background: var(--color-background-subtle);
-}
-
-.section-media__caption {
-	text-align: center;
 }
 
 .season {
