@@ -312,7 +312,7 @@ section {
 	z-index: 10;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) { /* --breakpoint-tablet */
 	section {
 		padding: var(--padding-content);
 	}
@@ -330,7 +330,7 @@ section {
 	object-fit: contain;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) { /* --breakpoint-tablet */
 	.comet-tail-bg-top {
 		left: 10%;
 	}
@@ -408,7 +408,7 @@ section {
 	}
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) { /* --breakpoint-tablet */
 	.title {
 		flex-direction: row;
 		justify-content: flex-start;
@@ -444,13 +444,13 @@ section {
 }
 
 /* Desktop+: pull title block up more than tablet so it visibly overlaps the hero (padding otherwise eats the offset). */
-@media (min-width: 64rem) {
+@media (min-width: 1024px) { /* --breakpoint-desktop */
 	.title {
 		top: calc(var(--space-6) * -1);
 	}
 }
 
-@media (min-width: 90rem) {
+@media (min-width: 1440px) { /* --breakpoint-desktop-xlarge */
 	.title {
 		top: calc(var(--space-8) * -1);
 	}
@@ -490,7 +490,7 @@ section {
 	color: var(--color-text-secondary);
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) { /* --breakpoint-tablet */
 	.age-groups__list {
 		flex-direction: row;
 		gap: var(--space-1);
@@ -546,7 +546,7 @@ section {
 	font-size: var(--font-size-h5);
 }
 
-@media (min-width: 40rem) { /* --breakpoint-phone */
+@media (min-width: 640px) { /* --breakpoint-phone */
 	.testimonial-card__quote {
 		margin: 0 var(--space-6);
 	}

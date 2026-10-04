@@ -260,7 +260,7 @@ onUnmounted(() => {
 	right: var(--space-1);
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) { /* --breakpoint-tablet */
 	.carousel__control--prev {
 		left: var(--space-2);
 	}

@@ -176,7 +176,7 @@ const instagramTiles = [
 	outline-offset: 2px;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) { /* --breakpoint-tablet */
 	.director__content {
 		flex-direction: row;
 		align-items: flex-start;

@@ -87,15 +87,15 @@
 }
 
 /* Breakpoint literals mirror breakpoints.css (vars can't be used in media queries). */
-@media (min-width: 48rem) { /* --breakpoint-tablet */
+@media (min-width: 768px) { /* --breakpoint-tablet */
 	:root { --padding-content: var(--padding-sm); }
 }
 
-@media (min-width: 64rem) { /* --breakpoint-desktop */
+@media (min-width: 1024px) { /* --breakpoint-desktop */
 	:root { --padding-content: var(--padding-lg); }
 }
 
-@media (min-width: 80rem) { /* --breakpoint-desktop-large */
+@media (min-width: 1280px) { /* --breakpoint-desktop-large */
 	:root { --padding-content: var(--padding-xl); }
 }
 

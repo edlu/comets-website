@@ -1,17 +1,16 @@
 /**
- * Standard breakpoint values (min-width).
- * Values in rem (1rem = 16px).
+ * Standard breakpoint values (min-width), in pixels.
  *
  * NOTE: CSS custom properties don't work inside media queries —
  * `@media (min-width: var(--breakpoint-phone))` silently never matches.
  * Write the literal value with the token name in a comment instead:
- *   @media (min-width: 40rem) { /* --breakpoint-phone *\/ ... }
+ *   @media (min-width: 640px) { /* --breakpoint-phone *\/ ... }
  * The variables are still useful for max-width etc.
  */
 :root {
-	--breakpoint-phone: 40rem;   /* 640px – large phone / small tablet */
-	--breakpoint-tablet: 48rem;   /* 768px – tablet */
-	--breakpoint-desktop: 64rem;   /* 1024px – desktop */
-	--breakpoint-desktop-large: 80rem;   /* 1280px – large desktop */
-    --breakpoint-desktop-xlarge: 90rem;   /* 1440px – extra large */
+	--breakpoint-phone: 640px;           /* large phone / small tablet */
+	--breakpoint-tablet: 768px;          /* tablet */
+	--breakpoint-desktop: 1024px;        /* desktop */
+	--breakpoint-desktop-large: 1280px;  /* large desktop */
+	--breakpoint-desktop-xlarge: 1440px; /* extra large */
 }

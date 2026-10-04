@@ -239,7 +239,7 @@ onUnmounted(() => {
 	align-items: center;
 }
 
-@media (min-width: 40rem) {
+@media (min-width: 640px) { /* --breakpoint-phone */
 	.nav {
 		display: flex;
 	}
@@ -255,7 +255,7 @@ onUnmounted(() => {
 	display: block;
 }
 
-@media (min-width: 40rem) {
+@media (min-width: 640px) { /* --breakpoint-phone */
 	.menu-button {
 		display: none;
 	}
@@ -284,7 +284,7 @@ onUnmounted(() => {
 	outline-offset: 2px;
 }
 
-@media (min-width: 40rem) {
+@media (min-width: 640px) { /* --breakpoint-phone */
 	.menu-toggle.menu-button {
 		display: none;
 	}

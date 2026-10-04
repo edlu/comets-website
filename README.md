@@ -77,7 +77,7 @@ More detail on exported graphics: `public/assets/README.md`.
 
 ## Notable UI behavior
 
-- **Navigation:** Below `40rem` width, primary links live in a **mobile menu** (hamburger). From `40rem` up, inline nav links show and the menu button is hidden.
+- **Navigation:** Below `640px` width, primary links live in a **mobile menu** (hamburger). From `640px` up, inline nav links show and the menu button is hidden.
 - **Hero:** `HeroMediaCarousel` cycles slides (images and/or video) with prev/next, keyboard support, and optional autoplay timing.
 - **Sign-up form:** Client-side validation, honeypot + short time gate for light bot friction, full-width submit. Submissions are sent via **[Web3Forms](https://web3forms.com)** when `VITE_WEB3FORMS_ACCESS_KEY` is set (configure the destination inbox in the Web3Forms dashboard—no recipient address in client code). If the key is missing, the app falls back to a **mailto** draft; the inbox address is built at runtime from character codes in `trialSignupEmail.js` so it is not stored as a plain literal string. Copy `.env.example` to `.env` or `.env.local` and add your key for production.
 - **Home testimonials:** Rotating quotes with directional transitions; click or timed advance.
@@ -87,12 +87,13 @@ More detail on exported graphics: `public/assets/README.md`.
 
 Defined in `src/styles/breakpoints.css`:
 
-- `--breakpoint-phone`: 40rem (640px)
-- `--breakpoint-tablet`: 48rem (768px)
-- `--breakpoint-desktop`: 64rem (1024px)
-- …and larger desktop steps
+- `--breakpoint-phone`: 640px
+- `--breakpoint-tablet`: 768px
+- `--breakpoint-desktop`: 1024px
+- `--breakpoint-desktop-large`: 1280px
+- `--breakpoint-desktop-xlarge`: 1440px
 
-Use in CSS: `@media (min-width: 40rem) { … }` (plain `rem` values work everywhere; custom properties inside `@media` can be unreliable in some browsers).
+Custom properties don't work inside `@media`, so write the pixel value with the token name in a comment: `@media (min-width: 768px) { /* --breakpoint-tablet */ … }`.
 
 ## Favicon
 
