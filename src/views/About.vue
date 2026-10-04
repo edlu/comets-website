@@ -10,6 +10,7 @@
 			</p>
 		</section>
 
+		<!--//
 		<section class="about-section director" aria-labelledby="director-heading">
 			<h2 id="director-heading">Meet the Director</h2>
 			<div class="director__content">
@@ -31,6 +32,7 @@
 				</div>
 			</div>
 		</section>
+//-->
 
 		<section class="about-section" aria-labelledby="social-heading">
 			<h2 id="social-heading">CCYL Social Links</h2>
