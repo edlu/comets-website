@@ -294,7 +294,7 @@ const handleSubmit = async () => {
 
 .sign-up__intro {
 	font-family: var(--font-family-body);
-	font-size: var(--font-size-medium);
+	font-size: var(--font-size-body);
 	line-height: var(--line-height-normal);
 	color: var(--teal-12);
 	text-align: center;
@@ -339,7 +339,7 @@ const handleSubmit = async () => {
 
 .form-label {
 	font-family: var(--font-family-body);
-	font-size: var(--font-size-medium);
+	font-size: var(--font-size-body);
 	font-weight: 600;
 	line-height: var(--line-height-normal);
 	color: var(--teal-12);
@@ -354,7 +354,7 @@ const handleSubmit = async () => {
 	color: var(--teal-12);
 	outline: none;
 	font-family: var(--font-family-body);
-	font-size: var(--font-size-medium);
+	font-size: var(--font-size-body);
 	width: 100%;
 	box-sizing: border-box;
 }

@@ -13,7 +13,7 @@
 			<p class="season-dates">September – November</p>
 			<figure class="section-media">
 				<img
-					class="section-media__img"
+					class="section-media__img media-frame"
 					src="https://picsum.photos/seed/programs-fall/1200/675"
 					width="1200"
 					height="675"
@@ -26,14 +26,14 @@
 				Fast-paced, high-rep version of lacrosse played on a roller hockey rink.
 			</p>
 			<h3 class="season-subheading">Benefits</h3>
-			<ul class="benefits">
+			<ul class="benefits large">
 				<li><strong>More touches</strong> — Get more reps in tighter space.</li>
 				<li><strong>Improve stick skills</strong> — Passing, catching, and shooting all sharpen fast.</li>
 				<li><strong>Game IQ</strong> — Learn to make quick decisions under pressure.</li>
 				<li><strong>Toughness &amp; confidence</strong> — Handle contact and chaos with composure.</li>
 				<li><strong>Goalie development</strong> — More live shots = faster growth.</li>
 			</ul>
-			<div class="format-notes">
+			<div class="format-notes surface surface--sunken">
 				<p class="large format-notes__item">
 					<strong>Boys:</strong> 6 v 6 · typically 2nd–7th grade <span class="muted">(confirm with program)</span>
 				</p>
@@ -48,7 +48,7 @@
 			<p class="season-dates">January – February</p>
 			<figure class="section-media">
 				<img
-					class="section-media__img"
+					class="section-media__img media-frame"
 					src="https://picsum.photos/seed/programs-winter/1200/675"
 					width="1200"
 					height="675"
@@ -64,7 +64,7 @@
 			<p class="large">
 				More playing time with more rotations, more touches, more reps, and more chances to grow.
 			</p>
-			<div class="format-notes">
+			<div class="format-notes surface surface--sunken">
 				<p class="large format-notes__item">
 					<strong>Boys:</strong> 6 v 6 · typically 2nd–7th grade <span class="muted">(confirm with program)</span>
 				</p>
@@ -79,7 +79,7 @@
 			<p class="season-dates">March – May</p>
 			<figure class="section-media">
 				<img
-					class="section-media__img"
+					class="section-media__img media-frame"
 					src="https://picsum.photos/seed/programs-spring/1200/675"
 					width="1200"
 					height="675"
@@ -106,7 +106,7 @@
 			<h2 id="tournament-heading">Tournament team</h2>
 			<figure class="section-media section-media--inset">
 				<img
-					class="section-media__img"
+					class="section-media__img media-frame"
 					src="https://picsum.photos/seed/programs-travel/1200/675"
 					width="1200"
 					height="675"
@@ -137,11 +137,6 @@ import SignUpForm from '@/components/SignUpForm.vue'
 
 <style scoped>
 .page {
-	max-width: var(--breakpoint-desktop-xlarge);
-	margin: 0 auto;
-	padding: var(--space-4);
-	display: flex;
-	flex-direction: column;
 	gap: var(--space-4);
 }
 
@@ -164,28 +159,12 @@ import SignUpForm from '@/components/SignUpForm.vue'
 }
 
 .section-media__img {
-	display: block;
-	width: 100%;
-	height: auto;
 	aspect-ratio: 16 / 9;
-	object-fit: cover;
-	border-radius: var(--space-1);
-	border: 1px solid var(--color-border);
 	background: var(--color-background-subtle);
 }
 
 .section-media__caption {
-	margin: var(--space-0-5) 0 0 0;
-	font-size: var(--font-size-small);
-	line-height: var(--line-height-relaxed);
-	color: var(--color-text-secondary);
 	text-align: center;
-}
-
-.lede {
-	margin: 0;
-	max-width: 46rem;
-	color: var(--color-text-secondary);
 }
 
 .season {
@@ -221,10 +200,7 @@ import SignUpForm from '@/components/SignUpForm.vue'
 
 .benefits {
 	margin: 0 0 var(--space-2) 0;
-	padding-left: 1.25rem;
 	max-width: 48rem;
-	font-size: var(--font-size-large);
-	line-height: var(--line-height-relaxed);
 }
 
 .benefits li {
@@ -237,17 +213,10 @@ import SignUpForm from '@/components/SignUpForm.vue'
 	gap: var(--space-0-5);
 	margin-top: var(--space-1);
 	padding: var(--space-2);
-	background: var(--color-background-subtle);
-	border-radius: var(--space-1);
-	border: 1px solid var(--color-border);
 }
 
 .format-notes__item {
 	margin: 0;
-}
-
-.muted {
-	color: var(--color-text-secondary);
 }
 
 .tournament {
@@ -269,8 +238,6 @@ import SignUpForm from '@/components/SignUpForm.vue'
 .tournament__copy {
 	margin: 0;
 	max-width: 48rem;
-	font-size: var(--font-size-large);
-	line-height: var(--line-height-relaxed);
 }
 
 .tournament .large {
@@ -278,7 +245,6 @@ import SignUpForm from '@/components/SignUpForm.vue'
 }
 
 a {
-	color: var(--teal-11);
 	font-weight: var(--font-weight-medium);
 }
 </style>

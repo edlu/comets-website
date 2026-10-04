@@ -15,6 +15,7 @@
 			<div class="director__content">
 				<figure class="director__photo">
 					<img
+						class="media-frame"
 						src="https://picsum.photos/seed/sindelar/900/600"
 						alt="Image of Sindelars"
 						loading="lazy"
@@ -56,7 +57,7 @@
 				<a
 					v-for="tile in instagramTiles"
 					:key="tile.id"
-					class="instagram-tile"
+					class="instagram-tile surface"
 					:href="instagramProfileUrl"
 					target="_blank"
 					rel="noopener noreferrer"
@@ -87,15 +88,6 @@ const instagramTiles = [
 </script>
 
 <style scoped>
-.page {
-	max-width: var(--breakpoint-desktop-xlarge);
-	margin: 0 auto;
-	padding: var(--space-4);
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-3);
-}
-
 .about-section {
 	display: flex;
 	flex-direction: column;
@@ -134,31 +126,17 @@ const instagramTiles = [
 }
 
 .director__photo img {
-	display: block;
-	width: 100%;
-	height: auto;
 	aspect-ratio: 3 / 2;
-	object-fit: cover;
-	border-radius: var(--space-1);
-	border: 1px solid var(--color-border);
-}
-
-.director__photo figcaption {
-	margin-top: var(--space-0-5);
-	font-size: var(--font-size-small);
-	color: var(--color-text-secondary);
 }
 
 .social-links {
 	margin: 0;
-	padding-left: 1.25rem;
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-0-5);
 }
 
 .social-links a {
-	color: var(--teal-11);
 	font-weight: var(--font-weight-medium);
 	text-decoration: none;
 }
@@ -176,9 +154,7 @@ const instagramTiles = [
 
 .instagram-tile {
 	display: block;
-	border-radius: var(--space-1);
 	overflow: hidden;
-	border: 1px solid var(--color-border);
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -192,7 +168,7 @@ const instagramTiles = [
 
 .instagram-tile:hover {
 	transform: translateY(-2px);
-	box-shadow: var(--shadow-2);
+	box-shadow: var(--shadow-elevation-medium);
 }
 
 .instagram-tile:focus-visible {
@@ -219,4 +195,3 @@ const instagramTiles = [
 	}
 }
 </style>
-

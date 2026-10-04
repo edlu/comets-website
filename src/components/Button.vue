@@ -108,7 +108,7 @@ const handleClick = (event) => {
 }
 
 .button--medium {
-	font-size: var(--font-size-medium);
+	font-size: var(--font-size-body);
 }
 
 .button--large {

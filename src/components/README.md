@@ -54,6 +54,48 @@ import NavigationButton from '@/components/NavigationButton.vue'
 </NavigationButton>
 ```
 
+## Card
+
+A content card built on the `.surface` classes from `src/styles/semantic.css`. Media sits full-bleed at the top; body and actions are padded with `--padding-card`.
+
+### Import
+
+```vue
+<script setup>
+import Card from '@/components/Card.vue'
+</script>
+```
+
+### Props
+
+| Prop | Type | Default | Options | Description |
+|------|------|---------|---------|-------------|
+| `as` | String | `'article'` | Any tag | Root element |
+| `surface` | String | `'default'` | `'default'`, `'sunken'`, `'raised'` | Surface type (background, shadow) |
+
+### Slots
+
+| Slot | Description |
+|------|-------------|
+| `media` | Full-bleed image at the top; `<img>` is sized to fill the width |
+| `default` | Card body (stacked with a `--space-1` gap) |
+| `actions` | Bottom row, e.g. buttons; children share the width equally |
+
+### Usage
+
+```vue
+<Card surface="raised">
+  <template #media>
+    <img src="/assets/ages-youth.jpg" alt="Youth" />
+  </template>
+  <h3>Youth</h3>
+  <p>Develop core skills and game understanding.</p>
+  <template #actions>
+    <Button variant="primary" to="/register">Register</Button>
+  </template>
+</Card>
+```
+
 ## Button
 
 A reusable button component based on the Figma design system.

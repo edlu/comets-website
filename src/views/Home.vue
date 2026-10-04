@@ -46,60 +46,25 @@
 		>
 			<h2>AGE GROUPS</h2>
 			<div class="age-groups__list">
-				<div
+				<Card
+					v-for="(group, index) in ageGroups"
+					:key="group.id"
 					class="age-group-card"
+					surface="raised"
 					v-motion
 					:initial="cardMotionInitial"
-					:visible-once="cardMotionVisible(140)"
+					:visible-once="cardMotionVisible(140 + index * 160)"
 				>
-					<div class="age-group-card__thumb">
-						<img :src="getAssetPath('assets/ages-little-sticks.jpg')" alt="Little Sticks" class="age-group-card__thumb-image" />
-					</div>
-					<div class="age-group-card__header">
-						<div class="age-group-card__meta">
-							<h3 class="age-group-card__title">LITTLE STICKS</h3>
-							<h4 class="age-group-card__label">Age 4-7</h4>
-						</div>
-					</div>
-					<p class="age-group-card__description">Introduction to lacrosse fundamentals through fun games and activities. Focus on basic skills and love of the game.</p>
-					<Button variant="primary" :to="{ path: '/register', query: { ageGroup: '4-7' } }">Register</Button>
-				</div>
-				<div
-					class="age-group-card"
-					v-motion
-					:initial="cardMotionInitial"
-					:visible-once="cardMotionVisible(300)"
-				>
-					<div class="age-group-card__thumb">
-						<img :src="getAssetPath('assets/ages-youth.jpg')" alt="Youth" class="age-group-card__thumb-image" />
-					</div>
-					<div class="age-group-card__header">
-						<div class="age-group-card__meta">
-							<h3 class="age-group-card__title">YOUTH</h3>
-								<h4 class="age-group-card__label">Age 8-12</h4>
-						</div>
-					</div>
-					<p class="age-group-card__description">Develop core skills and game understanding through practices and competitive play.</p>
-					<Button variant="primary" :to="{ path: '/register', query: { ageGroup: '8-12' } }">Register</Button>
-				</div>
-				<div
-					class="age-group-card"
-					v-motion
-					:initial="cardMotionInitial"
-					:visible-once="cardMotionVisible(460)"
-				>
-					<div class="age-group-card__thumb">
-						<img :src="getAssetPath('assets/ages-upper.jpg')" alt="Upper" class="age-group-card__thumb-image" />
-					</div>
-					<div class="age-group-card__header">
-						<div class="age-group-card__meta">
-							<h3 class="age-group-card__title">UPPER</h3>
-							<h4 class="age-group-card__label">Age 13-17</h4>
-						</div>	
-					</div>
-					<p class="age-group-card__description">Advanced training for competitive players looking to excel at the highest level of youth lacrosse.</p>
-					<Button variant="primary" :to="{ path: '/register', query: { ageGroup: '13-17' } }">Register</Button>
-				</div>
+					<template #media>
+						<img :src="getAssetPath(group.image)" :alt="group.name" class="age-group-card__image" />
+					</template>
+					<h3 class="age-group-card__title">{{ group.name.toUpperCase() }}</h3>
+					<h4 class="age-group-card__label">Age {{ group.ages }}</h4>
+					<p class="age-group-card__description">{{ group.description }}</p>
+					<template #actions>
+						<Button variant="primary" :to="{ path: '/register', query: { ageGroup: group.ages } }">Register</Button>
+					</template>
+				</Card>
 			</div>
 		</section>
 
@@ -127,7 +92,11 @@
 			>
 				<figure class="testimonial-card">
 					<Transition name="testimonial-quote" mode="out-in">
-						<blockquote :key="`quote-${activeTestimonial.id}`" class="testimonial-card__quote">
+						<blockquote
+							:key="`quote-${activeTestimonial.id}`"
+							class="testimonial-card__quote"
+							:class="{ 'testimonial-card__quote--long': isLongTestimonial(activeTestimonial) }"
+						>
 							“{{ activeTestimonial.quote }}”
 						</blockquote>
 					</Transition>
@@ -153,6 +122,7 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import Navigation from '@/components/Navigation.vue'
 import Button from '@/components/Button.vue'
+import Card from '@/components/Card.vue'
 import HeroMediaCarousel from '@/components/HeroMediaCarousel.vue'
 import SignUpForm from '@/components/SignUpForm.vue'
 import { getAssetPath } from '@/utils/assets'
@@ -191,6 +161,32 @@ const heroSlides = [
 	}
 ]
 
+const ageGroups = [
+	{
+		id: 'little-sticks',
+		name: 'Little Sticks',
+		ages: '4-7',
+		image: 'assets/ages-little-sticks.jpg',
+		description:
+			'Introduction to lacrosse fundamentals through fun games and activities. Focus on basic skills and love of the game.'
+	},
+	{
+		id: 'youth',
+		name: 'Youth',
+		ages: '8-12',
+		image: 'assets/ages-youth.jpg',
+		description: 'Develop core skills and game understanding through practices and competitive play.'
+	},
+	{
+		id: 'upper',
+		name: 'Upper',
+		ages: '13-17',
+		image: 'assets/ages-upper.jpg',
+		description:
+			'Advanced training for competitive players looking to excel at the highest level of youth lacrosse.'
+	}
+]
+
 const sectionMotionInitial = { opacity: 0, y: 36 }
 const cardMotionInitial = { opacity: 0, y: 26, scale: 0.985 }
 
@@ -223,8 +219,11 @@ function cardMotionVisible(delay = 0) {
 	}
 }
 
-const TESTIMONIAL_INTERVAL_MS = 4000
+/** Each quote stays up long enough to read: a base delay plus time per word. */
+const TESTIMONIAL_MIN_MS = 4000
+const TESTIMONIAL_MS_PER_WORD = 250
 
+/** Sourced from the "CCYLAX Parent Testimonials (Responses)" Google Form sheet. */
 const testimonials = [
 	{
 		id: 't1',
@@ -235,41 +234,60 @@ const testimonials = [
 	{
 		id: 't2',
 		quote:
-			'As a new lacrosse family, we felt welcomed right away. Communication is clear and the player development has been excellent.',
-		author: 'Daniel K.'
-	},
-	{
-		id: 't3',
-		quote:
-			'The program balances skill-building and teamwork perfectly. My daughter loves coming to training and games each week.',
-		author: 'Angela T.'
+			'We are so happy to be a part of the Culver City youth lacrosse program. Our son started when he was 9, and had no prior experience. Coach Jason welcomed him with so much warmth and encouragement, providing all the necessary gear to borrow and making it really easy to start out. The younger kids all come from different elementary schools in the Culver City area, fostering new friendships that will follow them to Culver Middle and High School. We truly love being a part of this local lacrosse community here in Culver City and encourage others to join!',
+		author: 'Rebecca H.'
 	}
 ]
+
+/** Quotes past this word count drop to a smaller type size so they don't run several screens tall. */
+const TESTIMONIAL_LONG_WORDS = 40
+
+function testimonialWordCount(testimonial) {
+	return testimonial.quote.trim().split(/\s+/).length
+}
+
+function isLongTestimonial(testimonial) {
+	return testimonialWordCount(testimonial) > TESTIMONIAL_LONG_WORDS
+}
+
+function testimonialDuration(testimonial) {
+	return Math.max(TESTIMONIAL_MIN_MS, testimonialWordCount(testimonial) * TESTIMONIAL_MS_PER_WORD)
+}
 
 const activeTestimonialIndex = ref(0)
 const autoplayPaused = ref(false)
 
 const activeTestimonial = computed(() => testimonials[activeTestimonialIndex.value])
 
-let testimonialIntervalId = null
+let testimonialTimeoutId = null
+
+function clearTestimonialTimer() {
+	if (testimonialTimeoutId) window.clearTimeout(testimonialTimeoutId)
+	testimonialTimeoutId = null
+}
+
+/** (Re)start the countdown for the current quote; no-op while paused. */
+function scheduleNextTestimonial() {
+	clearTestimonialTimer()
+	if (autoplayPaused.value || testimonials.length < 2) return
+	testimonialTimeoutId = window.setTimeout(() => {
+		nextTestimonial()
+	}, testimonialDuration(activeTestimonial.value))
+}
 
 function setAutoplayPaused(next) {
 	autoplayPaused.value = next
+	scheduleNextTestimonial()
 }
 
 function nextTestimonial() {
 	activeTestimonialIndex.value = (activeTestimonialIndex.value + 1) % testimonials.length
+	scheduleNextTestimonial()
 }
 
-onMounted(() => {
-	testimonialIntervalId = window.setInterval(() => {
-		if (!autoplayPaused.value) nextTestimonial()
-	}, TESTIMONIAL_INTERVAL_MS)
-})
+onMounted(scheduleNextTestimonial)
 
-onUnmounted(() => {
-	if (testimonialIntervalId) window.clearInterval(testimonialIntervalId)
-})
+onUnmounted(clearTestimonialTimer)
 </script>
 
 <style scoped>
@@ -286,7 +304,7 @@ section {
 	width: 100%;
 	min-width: 0; /* allow flex child to shrink so padding is respected when viewport < content width */
 	max-width: var(--breakpoint-desktop-xlarge);
-	padding: 0 var(--space-1);
+	padding: 0 var(--padding-content);
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-1);
@@ -296,13 +314,7 @@ section {
 
 @media (min-width: 48rem) {
 	section {
-		padding: var(--space-2);
-	}
-}
-
-@media (min-width: 90rem) {
-	section {
-		padding: var(--space-4);
+		padding: var(--padding-content);
 	}
 }
 
@@ -405,10 +417,10 @@ section {
 		max-width: none;
 		width: 100vw;
 		margin-left: calc(50% - 50vw);
-		padding-top: var(--space-2);
-		padding-bottom: var(--space-2);
+		padding-top: var(--padding-content);
+		padding-bottom: var(--padding-content);
 		padding-right: 0;
-		padding-left: calc(max(0px, (100vw - var(--breakpoint-desktop-xlarge)) / 2) + var(--space-2));
+		padding-left: calc(max(0px, (100vw - var(--breakpoint-desktop-xlarge)) / 2) + var(--padding-content));
 
 		.logo-comets-wrapper {
 			position: relative;
@@ -440,9 +452,6 @@ section {
 
 @media (min-width: 90rem) {
 	.title {
-		padding-top: var(--space-4);
-		padding-bottom: var(--space-4);
-		padding-left: calc(max(0px, (100vw - var(--breakpoint-desktop-xlarge)) / 2) + var(--space-4));
 		top: calc(var(--space-8) * -1);
 	}
 }
@@ -461,48 +470,21 @@ section {
 	flex-direction: column;
 	gap: var(--space-3);
 	min-width: 0; /* allow flex child to shrink so section padding is respected */
-	
-	.age-group-card {
-	display: inline-flex;
-	flex-direction: column;
-	gap: var(--space-1);
+}
+
+.age-group-card {
 	flex: 1;
-	min-width: 0; /* allow flex child to shrink so section padding is respected */
-	box-shadow: var(--shadow-2);
+}
 
-		.age-group-card__thumb {
-		height: 15rem;
-		width: 100%;
-		background: #fff;
-		border-top: 4px solid var(--teal-9);
-		border-radius: 0 0 var(--space-1) var(--space-1);
-		overflow: hidden;
+.age-group-card__image {
+	height: 15rem;
+	border-top: 4px solid var(--teal-9);
+}
 
-			.age-group-card__thumb-image {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				display: block;
-			}
-		}
-
-		.age-group-card__header {
-			display: flex;
-			gap: var(--space-1);
-			align-items: center;
-			width: 100%;
-		}
-
-		.age-group-card__meta {
-			display: flex;
-			flex-direction: column;
-			gap: var(--space-1);
-		}
-
-		.age-group-card__description {
-			flex: 1;
-		}
-	}
+.age-group-card__title,
+.age-group-card__label,
+.age-group-card__description {
+	margin: 0;
 }
 
 @media (min-width: 48rem) {
@@ -557,7 +539,11 @@ section {
 	font-weight: var(--font-weight-thin);
 }
 
-@media (min-width: var(--breakpoint-phone)) {
+.testimonial-card__quote--long {
+	font-size: var(--font-size-h5);
+}
+
+@media (min-width: 40rem) { /* --breakpoint-phone */
 	.testimonial-card__quote {
 		margin: 0 var(--space-6);
 	}
@@ -565,8 +551,9 @@ section {
 
 .testimonial-card__author {
 	margin: 0;
-	font-size: var(--font-size-medium);
+	font-size: var(--font-size-body);
 	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-normal);
 	color: var(--teal-11);
 	align-self: flex-end;
 	text-align: right;
@@ -620,218 +607,4 @@ section {
 		transition-duration: 0.01ms;
 	}
 }
-
-.seasonal-grid {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	gap: var(--space-1);
-	width: 100%;
-}
-
-@media (min-width: var(--breakpoint-phone)) {
-	.seasonal-grid {
-		flex-direction: row;
-	}
-}
-
-.seasonal-item {
-	flex: 1;
-	min-width: 15rem;
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-2);
-	color: var(--teal-12);
-}
-
-.seasonal-item__title {
-	font-family: var(--font-family-display);
-	font-size: var(--font-size-h4);
-	line-height: var(--line-height-tight);
-	font-weight: var(--font-weight-extra-bold);
-	margin: 0;
-}
-
-.seasonal-item__range {
-	font-family: var(--font-family-body);
-	font-size: var(--font-size-medium);
-	font-weight: 700;
-	line-height: var(--line-height-normal);
-	margin: 0;
-}
-
-.seasonal-item__list {
-	font-family: var(--font-family-body);
-	font-size: var(--font-size-medium);
-	line-height: var(--line-height-normal);
-	list-style: disc;
-	margin: 0 0 0 1.5rem;
-	padding: 0;
-}
-
-.section--tournaments .section-title {
-	margin-bottom: 0;
-}
-
-.tournaments__wrap {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-8);
-	width: 100%;
-}
-
-@media (min-width: var(--breakpoint-desktop)) {
-	.tournaments__wrap {
-		flex-direction: row;
-	}
-}
-
-.tournaments__content {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-8);
-	width: 100%;
-}
-
-@media (min-width: var(--breakpoint-desktop)) {
-	.tournaments__content {
-		max-width: 42rem;
-	}
-}
-
-.tournaments__list {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	gap: var(--space-8);
-}
-
-@media (min-width: var(--breakpoint-phone)) {
-	.tournaments__list {
-		flex-direction: row;
-	}
-}
-
-.tournament-item {
-	flex: 1;
-	min-width: 15rem;
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-4);
-}
-
-.tournament-item__title {
-	font-family: var(--font-family-display);
-	font-size: var(--font-size-h4);
-	line-height: var(--line-height-tight);
-	font-weight: var(--font-weight-extra-bold);
-	color: var(--teal-12);
-	margin: 0;
-}
-
-.tournament-item__desc {
-	font-family: var(--font-family-body);
-	font-size: var(--font-size-medium);
-	line-height: var(--line-height-normal);
-	color: var(--teal-12);
-	margin: 0;
-}
-
-.tournaments__visual {
-	display: none;
-	background: #fff;
-	border-top: 2px solid var(--teal-9);
-	min-height: 25rem;
-	flex: 1;
-}
-
-@media (min-width: 1024px) {
-	.tournaments__visual {
-		display: block;
-	}
-}
-
-.sign-up {
-	background-color: var(--teal-5);
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-3);
-	align-items: center;
-	justify-content: center;
-	padding: var(--space-8) var(--space-4);
-	width: 100%;
-	position: relative;
-	z-index: 10;
-}
-
-.sign-up__title {
-	font-family: var(--font-family-display);
-	font-size: var(--font-size-h3);
-	line-height: var(--line-height-tight);
-	font-weight: var(--font-weight-extra-bold);
-	color: var(--teal-12);
-	margin: 0 0 var(--space-4) 0;
-	text-align: center;
-}
-
-.sign-up__intro {
-	font-family: var(--font-family-body);
-	font-size: var(--font-size-medium);
-	line-height: var(--line-height-normal);
-	color: var(--teal-12);
-	text-align: center;
-	max-width: 100%;
-	margin: 0 0 var(--space-4) 0;
-}
-
-.sign-up__form {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-2);
-	align-items: center;
-	width: 100%;
-	max-width: var(--breakpoint-phone);
-}
-
-.form-group {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-2);
-	width: 100%;
-}
-
-.form-label {
-	font-family: var(--font-family-body);
-	font-size: var(--font-size-medium);
-	font-weight: 600;
-	line-height: var(--line-height-normal);
-	color: var(--teal-12);
-}
-
-.form-input {
-	height: var(--space-3);
-	padding: var(--space-0-5) var(--space-1);
-	border-radius: 1rem;
-	border: none;
-	background-color: var(--teal-3);
-	color: var(--teal-12);
-	outline: none;
-}
-
-.form-input:focus {
-	outline: 2px solid var(--teal-9);
-	outline-offset: 2px;
-}
-
-.comet-tail-bg-bottom {
-	position: absolute;
-	left: 5rem;
-	top: 140rem;
-	transform: rotate(135deg);
-	z-index: 0;
-	max-width: 40rem;
-	margin: 0 auto;
-	width: 100%;
-}
-
 </style>

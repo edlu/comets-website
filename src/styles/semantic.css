@@ -1,0 +1,143 @@
+/**
+ * Semantic layer
+ *
+ * Maps primitives (colors.css, spaces.css, sizes.css, shadows.css) to
+ * purpose-named tokens, plus the generic classes built on them.
+ * Views and components should reach for these before raw primitives
+ * (e.g. var(--radius-md), not var(--space-1); var(--color-border), not var(--slate-6)).
+ */
+
+/* ==================================================================
+ * Tokens
+ * ================================================================== */
+
+:root {
+	/* ------------------------------------------------------------
+	 * Color
+	 * ------------------------------------------------------------ */
+
+	/* Backgrounds */
+	--color-background: var(--slate-1);
+	--color-background-subtle: var(--slate-2);
+	--color-background-hover: var(--slate-3);
+	--color-surface-background: white;
+	--color-surface-border: var(--slate-6);
+	--color-surface-sunken-background: var(--slate-2);
+
+	/* Borders */
+	--color-border: var(--slate-6);
+	--color-border-hover: var(--slate-7);
+
+	/* Text */
+	--color-text-primary: var(--slate-12);
+	--color-text-secondary: var(--slate-11);
+	--color-text-tertiary: var(--slate-10);
+
+	/* Info (Blue) */
+	--color-info: var(--blue-9);
+	--color-info-hover: var(--blue-10);
+	--color-info-text: var(--blue-11);
+	--color-info-bg: var(--blue-3);
+
+	/* Success (Green) */
+	--color-success: var(--green-9);
+	--color-success-hover: var(--green-10);
+	--color-success-text: var(--green-11);
+	--color-success-bg: var(--green-3);
+
+	/* Error (Red) */
+	--color-error: var(--red-9);
+	--color-error-hover: var(--red-10);
+	--color-error-text: var(--red-11);
+	--color-error-bg: var(--red-3);
+
+	/* Warning (Amber) */
+	--color-warning: var(--amber-9);
+	--color-warning-hover: var(--amber-10);
+	--color-warning-text: var(--amber-11);
+	--color-warning-bg: var(--amber-3);
+
+	/* ------------------------------------------------------------
+	 * Radius
+	 * ------------------------------------------------------------ */
+
+	--radius-sm: var(--space-0-75);
+	--radius-md: var(--space-1);
+	--radius-lg: var(--space-2);
+	--radius-full: 9999px;
+
+	/* ------------------------------------------------------------
+	 * Padding
+	 * ------------------------------------------------------------ */
+
+	--padding-2xs: var(--space-0-25);  /* 4px */
+	--padding-xs: var(--space-0-5);    /* 8px */
+	--padding-sm: var(--space-1);      /* 16px */
+	--padding-md: var(--space-1-5);    /* 24px */
+	--padding-lg: var(--space-2);      /* 32px */
+	--padding-xl: var(--space-4);      /* 64px */
+	--padding-2xl: var(--space-6);     /* 96px */
+	--padding-3xl: var(--space-8);     /* 128px */
+
+	/** Main content gutter; steps up per breakpoint below. */
+	--padding-content: var(--padding-xs);
+
+	/** Inner padding for Card.vue content. */
+	--padding-card: var(--padding-sm);
+}
+
+/* Breakpoint literals mirror breakpoints.css (vars can't be used in media queries). */
+@media (min-width: 48rem) { /* --breakpoint-tablet */
+	:root { --padding-content: var(--padding-sm); }
+}
+
+@media (min-width: 64rem) { /* --breakpoint-desktop */
+	:root { --padding-content: var(--padding-lg); }
+}
+
+@media (min-width: 80rem) { /* --breakpoint-desktop-large */
+	:root { --padding-content: var(--padding-xl); }
+}
+
+/* ==================================================================
+ * Surfaces
+ * ================================================================== */
+
+/** Content container (cards, FAQ items, tiles). Combine with a modifier below for other types. */
+.surface {
+	background: var(--color-surface-background);
+	border: 1px solid var(--color-surface-border);
+	border-radius: var(--radius-md);
+}
+
+/** Recessed area (callouts, notes) that sits below the page plane. */
+.surface--sunken {
+	background: var(--color-surface-sunken-background);
+}
+
+/** Lifted off the page with a shadow (feature cards). */
+.surface--raised {
+	box-shadow: var(--shadow-elevation-medium);
+}
+
+/* ==================================================================
+ * Media
+ * ================================================================== */
+
+/** Responsive cover image with the standard border + radius. Set aspect-ratio per use. */
+.media-frame {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+}
+
+/* ==================================================================
+ * Text
+ * ================================================================== */
+
+.muted {
+	color: var(--color-text-secondary);
+}

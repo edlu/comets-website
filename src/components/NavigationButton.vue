@@ -35,7 +35,7 @@ defineProps({
 	border-radius: 1rem;
 	color: var(--teal-1);
 	font-family: var(--font-family-body);
-	font-size: var(--font-size-medium);
+	font-size: var(--font-size-body);
 	line-height: var(--line-height-medium);
 	font-weight: 500;
 	text-decoration: none;

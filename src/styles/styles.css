@@ -9,6 +9,7 @@
 @import "./sizes.css";
 @import "./spaces.css";
 @import "./shadows.css";
+@import "./semantic.css";
 @import "./typography.css";
 
 *, *::before, *::after {
@@ -17,4 +18,49 @@
 
 body {
     transition: all 0.3s ease;
+}
+
+/* ------------------------------------------------------------------
+ * Base elements
+ * ------------------------------------------------------------------ */
+
+a {
+	color: var(--teal-11);
+}
+
+ul,
+ol {
+	padding-left: 1.25rem;
+}
+
+figcaption {
+	margin-top: var(--space-0-5);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-relaxed);
+	color: var(--color-text-secondary);
+}
+
+/* ------------------------------------------------------------------
+ * Layout
+ * ------------------------------------------------------------------ */
+
+/** Standard inner page wrapper (About, Programs, FAQ, Register). */
+.page {
+	max-width: var(--breakpoint-desktop-xlarge);
+	margin: 0 auto;
+	padding: var(--padding-content);
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-3);
+}
+
+/* ------------------------------------------------------------------
+ * Shared patterns (generic surface/media/text classes live in semantic.css)
+ * ------------------------------------------------------------------ */
+
+/** Intro paragraph under a page title. Pair with .large for bigger text. */
+.lede {
+	margin: 0;
+	max-width: 42rem;
+	color: var(--color-text-secondary);
 }

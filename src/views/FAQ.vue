@@ -7,14 +7,14 @@
 		</p>
 
 		<div class="faq-list">
-			<details class="faq-item">
+			<details class="faq-item surface">
 				<summary>What is lacrosse? Why play?</summary>
 				<div class="faq-body">
 					<p class="large">
 						<strong>Stub — simple definition:</strong> Lacrosse is a fast team sport played with a stick and ball; rules and contact level vary by age and league.
 					</p>
 					<p class="large"><strong>Benefits of playing (expand for parents):</strong></p>
-					<ul class="faq-ul">
+					<ul class="faq-list-items large">
 						<li>Teamwork and communication</li>
 						<li>Conditioning and coordination</li>
 						<li>Confidence and fun competing with friends</li>
@@ -27,7 +27,7 @@
 				</div>
 			</details>
 
-			<details class="faq-item">
+			<details class="faq-item surface">
 				<summary>Do you have programs for boys and girls?</summary>
 				<div class="faq-body">
 					<p class="large">
@@ -39,7 +39,7 @@
 				</div>
 			</details>
 
-			<details class="faq-item">
+			<details class="faq-item surface">
 				<summary>Can my child try it out before signing up for a season?</summary>
 				<div class="faq-body">
 					<p class="large">
@@ -49,7 +49,7 @@
 				</div>
 			</details>
 
-			<details class="faq-item">
+			<details class="faq-item surface">
 				<summary>Where and when are practices (and how many per week)? Where and when are games?</summary>
 				<div class="faq-body">
 					<p class="large">
@@ -59,7 +59,7 @@
 				</div>
 			</details>
 
-			<details class="faq-item">
+			<details class="faq-item surface">
 				<summary>Do I need to buy my own gear?</summary>
 				<div class="faq-body">
 					<p class="large">
@@ -71,7 +71,7 @@
 				</div>
 			</details>
 
-			<details class="faq-item">
+			<details class="faq-item surface">
 				<summary>How physical or safe is lacrosse?</summary>
 				<div class="faq-body">
 					<p class="large">
@@ -81,7 +81,7 @@
 				</div>
 			</details>
 
-			<details class="faq-item">
+			<details class="faq-item surface">
 				<summary>What are registration costs for a season?</summary>
 				<div class="faq-body">
 					<p class="large">
@@ -95,7 +95,7 @@
 				</div>
 			</details>
 
-			<details class="faq-item">
+			<details class="faq-item surface">
 				<summary>How can I support the program?</summary>
 				<div class="faq-body">
 					<p class="large">
@@ -115,21 +115,6 @@ import SignUpForm from '@/components/SignUpForm.vue'
 </script>
 
 <style scoped>
-.page {
-	max-width: var(--breakpoint-desktop-xlarge);
-	margin: 0 auto;
-	padding: var(--space-4);
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-3);
-}
-
-.lede {
-	margin: 0;
-	max-width: 42rem;
-	color: var(--color-text-secondary);
-}
-
 .faq-list {
 	display: flex;
 	flex-direction: column;
@@ -137,9 +122,6 @@ import SignUpForm from '@/components/SignUpForm.vue'
 }
 
 .faq-item {
-	border: 1px solid var(--color-border);
-	border-radius: var(--space-1);
-	background: var(--color-background);
 	padding: 0 var(--space-2);
 }
 
@@ -180,14 +162,7 @@ import SignUpForm from '@/components/SignUpForm.vue'
 	margin-bottom: 0;
 }
 
-.faq-ul {
+.faq-list-items {
 	margin: 0 0 var(--space-2) 0;
-	padding-left: 1.25rem;
-	font-size: var(--font-size-large);
-	line-height: var(--line-height-relaxed);
-}
-
-a {
-	color: var(--teal-11);
 }
 </style>

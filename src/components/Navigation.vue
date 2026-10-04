@@ -184,17 +184,10 @@ onUnmounted(() => {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 0 var(--space-1);
 	position: sticky;
 	top: 0;
 	background-color: var(--teal-9);
 	z-index: 50;
-}
-
-@media (min-width: 48rem) {
-	.header {
-		padding: 0 var(--space-2);
-	}
 }
 
 .header-content {
@@ -204,7 +197,7 @@ onUnmounted(() => {
 	align-items: center;
 	justify-content: space-between;
 	gap: var(--space-1);
-	padding: var(--space-1) var(--space-2);
+	padding: var(--space-1) var(--padding-content);
 }
 
 .logo {
@@ -361,7 +354,7 @@ onUnmounted(() => {
 	background-color: var(--yellow-9);
 	color: var(--yellow-12);
 	font-family: var(--font-family-body);
-	font-size: var(--font-size-medium);
+	font-size: var(--font-size-body);
 	font-weight: 600;
 	line-height: var(--line-height-medium);
 	text-align: center;

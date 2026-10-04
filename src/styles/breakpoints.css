@@ -1,7 +1,12 @@
 /**
  * Standard breakpoint values (min-width).
- * Use in media queries: @media (min-width: 48rem) { ... }
  * Values in rem (1rem = 16px).
+ *
+ * NOTE: CSS custom properties don't work inside media queries —
+ * `@media (min-width: var(--breakpoint-phone))` silently never matches.
+ * Write the literal value with the token name in a comment instead:
+ *   @media (min-width: 40rem) { /* --breakpoint-phone *\/ ... }
+ * The variables are still useful for max-width etc.
  */
 :root {
 	--breakpoint-phone: 40rem;   /* 640px – large phone / small tablet */
