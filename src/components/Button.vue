@@ -1,16 +1,13 @@
 <template>
 	<component
 		:is="tag"
-		:type="tag === 'button' ? type : undefined"
-		:href="tag === 'a' ? href : undefined"
-		:to="tag === 'router-link' ? to : undefined"
+		v-bind="tagAttrs"
 		class="button"
 		:class="[
 			variantClasses,
 			sizeClass,
 			{ 'button--disabled': disabled }
 		]"
-		:disabled="disabled"
 		@click="handleClick"
 	>
 		<slot name="iconBefore" />
@@ -71,6 +68,14 @@ const tag = computed(() => {
 	if (props.to) return 'router-link'
 	if (props.href) return 'a'
 	return 'button'
+})
+
+// Only bind attributes the rendered tag understands. Passing e.g. href="undefined"
+// to RouterLink overrides the href it generates and drops the link from the tab order.
+const tagAttrs = computed(() => {
+	if (tag.value === 'router-link') return { to: props.to, 'aria-disabled': props.disabled || undefined }
+	if (tag.value === 'a') return { href: props.href, 'aria-disabled': props.disabled || undefined }
+	return { type: props.type, disabled: props.disabled }
 })
 
 // Variant modifier class (styles use --color-* from colors.css)

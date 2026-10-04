@@ -478,7 +478,6 @@ section {
 
 .age-group-card__image {
 	height: 15rem;
-	border-top: 4px solid var(--teal-9);
 }
 
 .age-group-card__title,

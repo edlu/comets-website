@@ -1,8 +1,7 @@
 <template>
 	<component
 		:is="to ? RouterLink : 'a'"
-		:to="to || undefined"
-		:href="to ? undefined : href"
+		v-bind="to ? { to } : { href }"
 		class="nav-button"
 		:class="{ 'nav-button--active': active }"
 	>
@@ -46,6 +45,11 @@ defineProps({
 
 .nav-button:hover {
 	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.nav-button:focus-visible {
+	outline: 2px solid var(--teal-1);
+	outline-offset: 2px;
 }
 
 .nav-button--active {

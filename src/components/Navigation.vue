@@ -54,6 +54,7 @@
 				/>
 				<aside
 					id="mobile-nav-panel"
+					ref="panelRef"
 					class="mobile-nav-panel"
 					role="dialog"
 					aria-modal="true"
@@ -130,6 +131,9 @@ const route = useRoute()
 const mobileMenuOpen = ref(false)
 const menuToggleRef = ref(null)
 const closeButtonRef = ref(null)
+const panelRef = ref(null)
+
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
 function toggleMobileMenu() {
 	if (mobileMenuOpen.value) {
@@ -162,9 +166,29 @@ watch(mobileMenuOpen, (open) => {
 	document.body.style.overflow = open ? 'hidden' : ''
 })
 
+/** Keep Tab / Shift+Tab cycling inside the open menu panel (it's an aria-modal dialog). */
+function trapFocus(e) {
+	const focusable = [...(panelRef.value?.querySelectorAll(FOCUSABLE) ?? [])]
+	if (!focusable.length) return
+	const first = focusable[0]
+	const last = focusable[focusable.length - 1]
+	const inPanel = panelRef.value.contains(document.activeElement)
+
+	if (e.shiftKey && (document.activeElement === first || !inPanel)) {
+		e.preventDefault()
+		last.focus()
+	} else if (!e.shiftKey && (document.activeElement === last || !inPanel)) {
+		e.preventDefault()
+		first.focus()
+	}
+}
+
 function onDocumentKeydown(e) {
-	if (e.key === 'Escape' && mobileMenuOpen.value) {
+	if (!mobileMenuOpen.value) return
+	if (e.key === 'Escape') {
 		closeMobileMenu()
+	} else if (e.key === 'Tab') {
+		trapFocus(e)
 	}
 }
 
