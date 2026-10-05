@@ -34,7 +34,6 @@
 				</hgroup>
 
 				<p v-for="(paragraph, i) in season.description" :key="i" class="season__text">
-					<strong v-if="paragraph.lead">{{ paragraph.lead }}</strong>
 					{{ paragraph.text }}
 				</p>
 
@@ -131,8 +130,7 @@ const seasons = [
 		},
 		description: [
 			{
-				lead: 'Olympic format:',
-				text: 'fast-paced games (5 field players + 1 goalie per team). Quick transitions, high-scoring opportunities, and constant movement.'
+				text: 'Olympic format: fast-paced games (5 field players + 1 goalie per team). Quick transitions, high-scoring opportunities, and constant movement.'
 			}
 		],
 		benefits: [
