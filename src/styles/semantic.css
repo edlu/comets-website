@@ -29,9 +29,9 @@
 	--color-border-hover: var(--slate-7);
 
 	/* Text */
-	--color-text-primary: var(--slate-12);
-	--color-text-secondary: var(--slate-11);
-	--color-text-tertiary: var(--slate-10);
+	--color-text-primary: var(--slate-11);
+	--color-text-secondary: var(--slate-10);
+	--color-text-tertiary: var(--slate-9);
 
 	/* Info (Blue) */
 	--color-info: var(--blue-9);

@@ -3,10 +3,8 @@
 	<main class="page">
 		<h1>About Us</h1>
 		<section class="about-section" aria-labelledby="mission-heading">
-			<h2 id="mission-heading">Mission Statement</h2>
 			<p class="belief large">
-				We believe lacrosse is more than a sport-it is a pathway to personal growth and connection that are the
-				building blocks for a life of success, passion and fulfillment.
+				We believe lacrosse is more than a sport.  It is a pathway to personal growth and connection that are the building blocks for a life of success, passion and fulfillment.
 			</p>
 		</section>
 
@@ -124,19 +122,23 @@ onMounted(async () => {
 
 .about-section p {
 	margin: 0;
-	max-width: 42rem;
 	color: var(--color-text-secondary);
 }
 
 .belief {
 	margin: 0;
-	padding-left: var(--space-1);
+	padding: var(--space-2);
 	font-style: italic;
-	max-width: 48rem;
-	font-size: var(--font-size-h4);
+	font-size: var(--font-size-h3);
 	line-height: var(--line-height-relaxed);
 	font-weight: var(--font-weight-light);
 	color: var(--teal-12);
+}
+
+@media (min-width: 768px) { /* --breakpoint-tablet */
+	.belief {
+		font-size: var(--font-size-h1);
+	}
 }
 
 .director__content {

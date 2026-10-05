@@ -48,7 +48,7 @@ figcaption {
 .page {
 	max-width: var(--breakpoint-desktop-xlarge);
 	margin: 0 auto;
-	padding: var(--padding-content);
+	padding: var(--padding-lg) var(--padding-content);
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-3);
@@ -61,6 +61,5 @@ figcaption {
 /** Intro paragraph under a page title. Pair with .large for bigger text. */
 .lede {
 	margin: 0;
-	max-width: 42rem;
 	color: var(--color-text-secondary);
 }

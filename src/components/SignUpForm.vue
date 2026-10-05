@@ -1,7 +1,7 @@
 <template>
 	<section class="sign-up" :class="{ 'sign-up--plain': variant === 'plain' }">
 		<h2 class="sign-up__title">CONTACT US FOR A FREE TRIAL PRACTICE</h2>
-		<p class="sign-up__intro">Starter equipment for trials and beginners are provided. We'll reach out and coordinate scheduling.</p>
+		<p class="sign-up__intro"><strong>Starter equipment for trials and beginners are provided.</strong> We'll reach out and coordinate scheduling.</p>
 		<form class="sign-up__form" novalidate @submit.prevent="handleSubmit">
 			<p v-if="submitGateError" class="form-error form-error--banner" role="alert">
 				{{ submitGateError }}

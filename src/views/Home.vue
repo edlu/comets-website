@@ -16,7 +16,7 @@
 				<div class="title__content">
 					<div class="headings">
 					  <h1>CULVER CITY YOUTH LACROSSE</h1>
-					  <h2>PLAY LAX WITH US!</h2>
+					  <h2>Join our lacrosse community!</h2>
 					</div>
 					<div class="intro">
 						<p class="large">
@@ -388,12 +388,13 @@ section {
 			border-radius: 0;
 
 			h1 { 
-				margin-bottom: 0; 
 				color: var(--teal-1);
+				line-height: 0.5em;
 			}
+			
 			h2 {
-				margin-top: 0;
 				color: var(--teal-3);
+				font-weight: var(--font-weight-medium);
 			}
 		}
 
