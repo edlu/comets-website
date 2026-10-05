@@ -388,6 +388,19 @@ const handleSubmit = async () => {
 	font-size: var(--font-size-body);
 	width: 100%;
 	box-sizing: border-box;
+	transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Hover: lighter fill + inset ring (box-shadow, so it doesn't clash with focus/error outlines) */
+.form-input:hover {
+	background-color: var(--teal-2);
+	box-shadow: inset 0 0 0 1px var(--teal-7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.form-input {
+		transition: none;
+	}
 }
 
 .form-input:focus {

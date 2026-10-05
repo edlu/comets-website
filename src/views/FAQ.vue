@@ -2,13 +2,13 @@
 	<Navigation />
 	<main class="page">
 		<h1>Frequently asked questions</h1>
-		<p class="lede large">
-			Stub answers from the CCYLAX website feedback doc—replace with final program copy, real schedules, pricing, and live links (nonprofit, donate, shop gear).
-		</p>
-
 		<div class="faq-list">
 			<details class="faq-item surface">
-				<summary>What is lacrosse? Why play?</summary>
+				<summary>
+					<span>What is lacrosse? Why play?</span>
+					<IconPlus class="faq-item__icon faq-item__icon--closed" :size="20" stroke-width="2.5" aria-hidden="true" />
+					<IconMinus class="faq-item__icon faq-item__icon--open" :size="20" stroke-width="2.5" aria-hidden="true" />
+				</summary>
 				<div class="faq-body">
 					<p class="large">
 						<strong>Stub — simple definition:</strong> Lacrosse is a fast team sport played with a stick and ball; rules and contact level vary by age and league.
@@ -28,7 +28,11 @@
 			</details>
 
 			<details class="faq-item surface">
-				<summary>Do you have programs for boys and girls?</summary>
+				<summary>
+					<span>Do you have programs for boys and girls?</span>
+					<IconPlus class="faq-item__icon faq-item__icon--closed" :size="20" stroke-width="2.5" aria-hidden="true" />
+					<IconMinus class="faq-item__icon faq-item__icon--open" :size="20" stroke-width="2.5" aria-hidden="true" />
+				</summary>
 				<div class="faq-body">
 					<p class="large">
 						<strong>Boys — stub:</strong> Age groups, season focus, and what a first-time player experiences.
@@ -40,7 +44,11 @@
 			</details>
 
 			<details class="faq-item surface">
-				<summary>Can my child try it out before signing up for a season?</summary>
+				<summary>
+					<span>Can my child try it out before signing up for a season?</span>
+					<IconPlus class="faq-item__icon faq-item__icon--closed" :size="20" stroke-width="2.5" aria-hidden="true" />
+					<IconMinus class="faq-item__icon faq-item__icon--open" :size="20" stroke-width="2.5" aria-hidden="true" />
+				</summary>
 				<div class="faq-body">
 					<p class="large">
 						Yes. New families can arrange a trial practice—final process TBD. Use the
@@ -50,7 +58,11 @@
 			</details>
 
 			<details class="faq-item surface">
-				<summary>Where and when are practices (and how many per week)? Where and when are games?</summary>
+				<summary>
+					<span>Where and when are practices (and how many per week)? Where and when are games?</span>
+					<IconPlus class="faq-item__icon faq-item__icon--closed" :size="20" stroke-width="2.5" aria-hidden="true" />
+					<IconMinus class="faq-item__icon faq-item__icon--open" :size="20" stroke-width="2.5" aria-hidden="true" />
+				</summary>
 				<div class="faq-body">
 					<p class="large">
 						Stub: season-specific days, typical time windows (feedback suggested e.g. <em>6:00–7:30 p.m. weeknights</em> when you can commit), fields, and game days. Per doc, this can mirror bullets on the
@@ -60,7 +72,11 @@
 			</details>
 
 			<details class="faq-item surface">
-				<summary>Do I need to buy my own gear?</summary>
+				<summary>
+					<span>Do I need to buy my own gear?</span>
+					<IconPlus class="faq-item__icon faq-item__icon--closed" :size="20" stroke-width="2.5" aria-hidden="true" />
+					<IconMinus class="faq-item__icon faq-item__icon--open" :size="20" stroke-width="2.5" aria-hidden="true" />
+				</summary>
 				<div class="faq-body">
 					<p class="large">
 						Stub: explain <strong>gear families can borrow</strong> to get started, what kids eventually need to own, and where to buy.
@@ -72,7 +88,11 @@
 			</details>
 
 			<details class="faq-item surface">
-				<summary>How physical or safe is lacrosse?</summary>
+				<summary>
+					<span>How physical or safe is lacrosse?</span>
+					<IconPlus class="faq-item__icon faq-item__icon--closed" :size="20" stroke-width="2.5" aria-hidden="true" />
+					<IconMinus class="faq-item__icon faq-item__icon--open" :size="20" stroke-width="2.5" aria-hidden="true" />
+				</summary>
 				<div class="faq-body">
 					<p class="large">
 						Stub: short, honest answer by age group—contact rules, required equipment, coaching emphasis, alignment with league and
@@ -82,7 +102,11 @@
 			</details>
 
 			<details class="faq-item surface">
-				<summary>What are registration costs for a season?</summary>
+				<summary>
+					<span>What are registration costs for a season?</span>
+					<IconPlus class="faq-item__icon faq-item__icon--closed" :size="20" stroke-width="2.5" aria-hidden="true" />
+					<IconMinus class="faq-item__icon faq-item__icon--open" :size="20" stroke-width="2.5" aria-hidden="true" />
+				</summary>
 				<div class="faq-body">
 					<p class="large">
 						Stub: give ranges or a fee table when finalized. Many parents look here before starting registration—see
@@ -96,7 +120,11 @@
 			</details>
 
 			<details class="faq-item surface">
-				<summary>How can I support the program?</summary>
+				<summary>
+					<span>How can I support the program?</span>
+					<IconPlus class="faq-item__icon faq-item__icon--closed" :size="20" stroke-width="2.5" aria-hidden="true" />
+					<IconMinus class="faq-item__icon faq-item__icon--open" :size="20" stroke-width="2.5" aria-hidden="true" />
+				</summary>
 				<div class="faq-body">
 					<p class="large">
 						Stub: volunteering, team parent roles, spirit—and once the nonprofit site is live, add a <strong>Donate</strong> link and short note on how donations help.
@@ -110,6 +138,7 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { IconMinus, IconPlus } from '@tabler/icons-vue'
 import Navigation from '@/components/Navigation.vue'
 import SignUpForm from '@/components/SignUpForm.vue'
 </script>
@@ -122,7 +151,8 @@ import SignUpForm from '@/components/SignUpForm.vue'
 }
 
 .faq-item {
-	padding: 0 var(--space-2);
+	overflow: hidden; /* clip the summary's hover background to the rounded corners */
+	transition: border-color 0.15s ease;
 }
 
 .faq-item summary {
@@ -130,28 +160,69 @@ import SignUpForm from '@/components/SignUpForm.vue'
 	font-weight: var(--font-weight-bold);
 	font-size: var(--font-size-h4);
 	line-height: var(--line-height-normal);
-	padding: var(--space-2) 0;
+	padding: var(--space-2);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-1);
 	cursor: pointer;
 	list-style: none;
+	transition: background-color 0.15s ease;
+}
+
+/* Hover: darker border, tinted question row */
+.faq-item:hover {
+	border-color: var(--color-border-hover);
+}
+
+.faq-item summary:hover {
+	background-color: var(--teal-2);
+}
+
+/* Pressed */
+.faq-item summary:active {
+	background-color: var(--teal-3);
+}
+
+/* Open: brand accent on the expanded card */
+.faq-item[open] {
+	border-color: var(--teal-7);
+}
+
+.faq-item summary:focus-visible {
+	outline: 2px solid var(--teal-9);
+	outline-offset: -2px; /* inset so overflow: hidden doesn't clip it */
+	border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.faq-item,
+	.faq-item summary {
+		transition: none;
+	}
 }
 
 .faq-item summary::-webkit-details-marker {
 	display: none;
 }
 
-.faq-item summary::after {
-	content: '+';
-	float: right;
-	font-weight: var(--font-weight-extra-bold);
+.faq-item__icon {
+	flex-shrink: 0;
 	color: var(--teal-11);
 }
 
-.faq-item[open] summary::after {
-	content: '–';
+/* Plus while closed, minus while open */
+.faq-item__icon--open,
+.faq-item[open] .faq-item__icon--closed {
+	display: none;
+}
+
+.faq-item[open] .faq-item__icon--open {
+	display: block;
 }
 
 .faq-body {
-	padding: 0 0 var(--space-2) 0;
+	padding: 0 var(--space-2) var(--space-2);
 }
 
 .faq-body p.large {
