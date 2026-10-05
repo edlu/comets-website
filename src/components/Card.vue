@@ -40,9 +40,11 @@ const surfaceClass = computed(() => (props.surface === 'default' ? null : `surfa
 	overflow: hidden; /* clip full-bleed media to the rounded corners */
 }
 
-.card__media :slotted(img) {
+/* :where() keeps these defaults low-specificity so pages can size their own images */
+:where(.card__media) :slotted(img) {
 	display: block;
 	width: 100%;
+	height: auto; /* don't let width/height attributes fix the rendered height */
 	object-fit: cover;
 }
 
