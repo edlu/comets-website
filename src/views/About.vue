@@ -55,38 +55,60 @@
 			<p class="large">
 				Recent highlights from practices, games, and community moments.
 			</p>
-			<div class="instagram-grid">
-				<a
-					v-for="tile in instagramTiles"
-					:key="tile.id"
-					class="instagram-tile surface"
-					:href="instagramProfileUrl"
-					target="_blank"
-					rel="noopener noreferrer"
-					:aria-label="`View more on Instagram: ${tile.alt}`"
-				>
-					<img :src="tile.src" :alt="tile.alt" loading="lazy" />
-				</a>
-			</div>
+			<template v-if="instagramLoaded">
+				<div v-if="instagramPosts.length" class="instagram-grid">
+					<a
+						v-for="post in instagramPosts"
+						:key="post.id"
+						class="instagram-tile surface"
+						:href="post.permalink"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img
+							:src="getAssetPath(post.image)"
+							:width="post.width"
+							:height="post.height"
+							:alt="post.alt"
+							loading="lazy"
+						/>
+						<IconPlayerPlayFilled v-if="post.isVideo" class="instagram-tile__video" :size="20" aria-hidden="true" />
+					</a>
+				</div>
+				<p class="large">
+					<a :href="instagramProfileUrl" target="_blank" rel="noopener noreferrer">Follow @culvercityyouthlacrosse on Instagram</a>
+				</p>
+			</template>
 		</section>
 	</main>
 	<SignUpForm />
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue'
+import { IconPlayerPlayFilled } from '@tabler/icons-vue'
 import Navigation from '@/components/Navigation.vue'
 import SignUpForm from '@/components/SignUpForm.vue'
+import { getAssetPath } from '@/utils/assets'
 
 const instagramProfileUrl = 'https://www.instagram.com/culvercityyouthlacrosse/'
 
-const instagramTiles = [
-	{ id: 'ig-1', src: 'https://picsum.photos/seed/ccyl-ig-1/600/600', alt: 'Practice highlight' },
-	{ id: 'ig-2', src: 'https://picsum.photos/seed/ccyl-ig-2/600/600', alt: 'Game day moment' },
-	{ id: 'ig-3', src: 'https://picsum.photos/seed/ccyl-ig-3/600/600', alt: 'Team huddle' },
-	{ id: 'ig-4', src: 'https://picsum.photos/seed/ccyl-ig-4/600/600', alt: 'Skills training' },
-	{ id: 'ig-5', src: 'https://picsum.photos/seed/ccyl-ig-5/600/600', alt: 'Community event' },
-	{ id: 'ig-6', src: 'https://picsum.photos/seed/ccyl-ig-6/600/600', alt: 'Player spotlight' }
-]
+/** Latest posts, generated at build time by scripts/fetch-instagram.mjs. */
+const instagramPosts = ref([])
+const instagramLoaded = ref(false)
+
+onMounted(async () => {
+	try {
+		const res = await fetch(getAssetPath('instagram/feed.json'))
+		const feed = res.ok ? await res.json() : null
+		instagramPosts.value = Array.isArray(feed?.posts) ? feed.posts : []
+	} catch {
+		// Missing or invalid feed (e.g. local dev): fall back to the follow link only.
+		instagramPosts.value = []
+	} finally {
+		instagramLoaded.value = true
+	}
+})
 </script>
 
 <style scoped>
@@ -108,10 +130,12 @@ const instagramTiles = [
 
 .belief {
 	margin: 0;
+	padding-left: var(--space-1);
+	font-style: italic;
 	max-width: 48rem;
 	font-size: var(--font-size-h4);
 	line-height: var(--line-height-relaxed);
-	font-weight: var(--font-weight-bold);
+	font-weight: var(--font-weight-light);
 	color: var(--teal-12);
 }
 
@@ -155,6 +179,7 @@ const instagramTiles = [
 }
 
 .instagram-tile {
+	position: relative;
 	display: block;
 	overflow: hidden;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -166,6 +191,14 @@ const instagramTiles = [
 	height: auto;
 	aspect-ratio: 1 / 1;
 	object-fit: cover;
+}
+
+.instagram-tile__video {
+	position: absolute;
+	top: var(--space-0-5);
+	right: var(--space-0-5);
+	color: white;
+	filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.5));
 }
 
 .instagram-tile:hover {

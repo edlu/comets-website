@@ -21,7 +21,18 @@ npm install    # install dependencies
 npm run dev    # dev server (default http://localhost:5173)
 npm run build  # production build → dist/
 npm run preview # serve dist/ locally
+npm run instagram # fetch latest Instagram posts (runs automatically before build)
 ```
+
+## Instagram feed (About page)
+
+The "From Our Instagram" grid shows the latest 6 posts from a [Behold](https://behold.so) JSON feed (free plan).
+
+- `scripts/fetch-instagram.mjs` runs before every build. It reads `BEHOLD_FEED_URL`, downloads each post's image into `public/instagram/` (gitignored) and writes `public/instagram/feed.json`. Visitors only load these local files, so Behold's 1,200 views/month limit only counts builds.
+- If `BEHOLD_FEED_URL` is unset or the fetch fails, an empty feed is written and the page shows just the "Follow us on Instagram" link. The build never fails because of it.
+- **Production:** set `BEHOLD_FEED_URL` as a repository variable (Settings → Secrets and variables → Actions → Variables). The deploy workflow rebuilds daily at ~6 AM Pacific to pick up new posts, and can be run manually from the Actions tab.
+- **Locally:** `BEHOLD_FEED_URL=https://feeds.behold.so/… npm run instagram`, then `npm run dev`.
+- GitHub pauses scheduled workflows after 60 days without repository activity; re-enable it from the Actions tab if posts stop updating.
 
 ## Project structure
 

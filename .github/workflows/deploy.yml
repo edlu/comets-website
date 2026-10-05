@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  # Rebuild daily so the About page picks up new Instagram posts
+  schedule:
+    - cron: '0 13 * * *' # 13:00 UTC ≈ 6 AM Pacific
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -34,6 +38,8 @@ jobs:
         run: npm run build
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
+          # Repo variable (Settings → Secrets and variables → Actions → Variables)
+          BEHOLD_FEED_URL: ${{ vars.BEHOLD_FEED_URL }}
 
       - name: Setup 404 page for Vue Router
         run: cp dist/index.html dist/404.html
