@@ -7,7 +7,7 @@
 		:style="{ '--carousel-fade-ms': `${fadeMs}ms` }"
 		@keydown="onKeydown"
 	>
-		<div class="carousel__track">
+		<div class="carousel__track" @click="goNext">
 			<div
 				v-for="(slide, i) in slides"
 				:key="slideKey(slide, i)"
@@ -95,6 +95,8 @@ const props = defineProps({
 
 const activeIndex = ref(0)
 const videoRefs = ref({})
+/** Set once the visitor navigates manually; autoplay then stays off. */
+const autoplayStopped = ref(false)
 
 let intervalId = null
 
@@ -107,11 +109,16 @@ function setVideoRef(i, el) {
 	else delete videoRefs.value[i]
 }
 
-function go(delta) {
+function advance(delta) {
 	const n = props.slides.length
 	if (n < 2) return
 	activeIndex.value = (activeIndex.value + delta + n) % n
-	restartAutoplay()
+}
+
+/** Manual navigation (click, arrows, keys): move, then stay on that slide. */
+function go(delta) {
+	stopAutoplay()
+	advance(delta)
 }
 
 function goNext() {
@@ -122,10 +129,17 @@ function goPrev() {
 	go(-1)
 }
 
+function stopAutoplay() {
+	autoplayStopped.value = true
+	if (intervalId) clearInterval(intervalId)
+	intervalId = null
+}
+
 function restartAutoplay() {
 	if (intervalId) clearInterval(intervalId)
-	if (props.slides.length < 2) return
-	intervalId = window.setInterval(goNext, props.intervalMs)
+	intervalId = null
+	if (autoplayStopped.value || props.slides.length < 2) return
+	intervalId = window.setInterval(() => advance(1), props.intervalMs)
 }
 
 function syncVideos() {
@@ -196,6 +210,7 @@ onUnmounted(() => {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	cursor: pointer;
 }
 
 .carousel__slide {
